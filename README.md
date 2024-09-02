@@ -12,7 +12,6 @@
 
    ```bash
    git clone https://github.com/khushbuoswal/SIS.git
-   cd SIS
 
    ```
 
