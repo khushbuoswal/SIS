@@ -31,11 +31,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { ButtonLoading } from "@/components/ui/button-loading";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Dashboard() {
   const [fileSelected, setFileSelected] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -46,6 +48,14 @@ export default function Dashboard() {
       setFileName(null);
       setFileSelected(false);
     }
+  };
+
+  const handleGenerateQuiz = async () => {
+    setLoading(true);
+    setTimeout(() => {
+      // Redirect to /quiz after 3 seconds
+      window.location.href = '/quiz';
+    }, 3000);
   };
 
   return (
@@ -211,8 +221,8 @@ export default function Dashboard() {
                 <div className="flex w-sm items-center space-x-2 mt-5">
                   <Input type="file" onChange={handleFileChange}/>
                 </div>
-                <Button className="mt-5" type="submit" disabled={!fileSelected}>
-                  Generate Quiz
+                <Button className="mt-5" type="submit" disabled={!fileSelected || loading} onClick={handleGenerateQuiz}>
+                  {loading ? <ButtonLoading /> : 'Generate Quiz'}
                 </Button>
               </div>
             </div>
