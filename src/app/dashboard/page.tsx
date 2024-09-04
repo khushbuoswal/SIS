@@ -35,10 +35,17 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Dashboard() {
   const [fileSelected, setFileSelected] = useState(false);
+  const [fileName, setFileName] = useState<string | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
-    setFileSelected(files ? files.length > 0 : false);
+    if (files && files.length > 0) {
+      setFileName(files[0].name); // Set the file name
+      setFileSelected(true);
+    } else {
+      setFileName(null);
+      setFileSelected(false);
+    }
   };
 
   return (
@@ -196,10 +203,10 @@ export default function Dashboard() {
             >
               <div className="flex flex-col items-center gap-1 text-center mb-10">
                 <h3 className="text-2xl font-bold tracking-tight">
-                  You have no document uploaded
+                  {fileName ? fileName : 'You have no document uploaded'}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-2">
-                  Upload a PDF document to get started.
+                  {fileName ? 'Ready! Generate a quiz now' : 'Upload a PDF document to get started.'}
                 </p>
                 <div className="flex w-sm items-center space-x-2 mt-5">
                   <Input type="file" onChange={handleFileChange}/>
