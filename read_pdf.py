@@ -1,6 +1,8 @@
 import PyPDF2
 import json
 
+#Hi
+
 def read_pdf(file_path):
     pdf_file = open(file_path, 'rb')
     read_pdf = PyPDF2.PdfFileReader(pdf_file)
