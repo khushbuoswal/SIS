@@ -10,11 +10,20 @@ export function ButtonLoading() {
   );
 }
 
-export function ButtonLoading2() {
+export function ButtonLoadingDashboard() {
   return (
     <Button disabled>
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       Logging in
+    </Button>
+  );
+}
+
+export function ButtonLoadingQuiz() {
+  return (
+    <Button disabled>
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      Generating...
     </Button>
   );
 }
