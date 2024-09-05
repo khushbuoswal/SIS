@@ -16,7 +16,7 @@ import { Globe } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
-import { ButtonLoading2 } from "@/components/ui/button-loading";
+import { ButtonLoadingDashboard } from "@/components/ui/button-loading";
 
 export default function Home() {
   const [loading, setLoading] = useState(false);
@@ -73,7 +73,7 @@ export default function Home() {
               <Input id="password" type="password" required />
             </div>
             <Button type="submit" onClick={handleLogin} disabled={loading}>
-              {loading ? <ButtonLoading2 /> : "Login"}
+              {loading ? <ButtonLoadingDashboard /> : "Login"}
             </Button>
             <div className="relative flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
