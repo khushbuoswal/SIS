@@ -9,3 +9,12 @@ export function ButtonLoading() {
     </Button>
   );
 }
+
+export function ButtonLoading2() {
+  return (
+    <Button disabled>
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      Logging in
+    </Button>
+  );
+}
