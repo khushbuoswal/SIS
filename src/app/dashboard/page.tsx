@@ -31,13 +31,33 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { ButtonLoading } from "@/components/ui/button-loading";
+import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export default function Dashboard() {
   const [fileSelected, setFileSelected] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [quizQuestions, setQuizQuestions] = useState<string | null>(null);
+
+  const fetchQuizQuestions = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+      });
+
+      const data = await response.json();
+      setQuizQuestions(data.message);
+
+      // Save to local storage
+      localStorage.setItem("quizQuestions", JSON.stringify(data.message));
+    } catch (error) {
+      console.error("Error fetching quiz questions:", error);
+      setQuizQuestions("An error occurred while fetching quiz questions.");
+    }
+    setLoading(false);
+  };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -51,11 +71,8 @@ export default function Dashboard() {
   };
 
   const handleGenerateQuiz = async () => {
-    setLoading(true);
-    setTimeout(() => {
-      // Redirect to /quiz after 3 seconds
-      window.location.href = '/quiz';
-    }, 3000);
+    await fetchQuizQuestions();
+    window.location.href = "/quiz";
   };
 
   return (
@@ -213,17 +230,31 @@ export default function Dashboard() {
             >
               <div className="flex flex-col items-center gap-1 text-center mb-10">
                 <h3 className="text-2xl font-bold tracking-tight">
-                  {fileName ? fileName : 'You have no document uploaded'}
+                  {fileName ? fileName : "You have no document uploaded"}
                 </h3>
                 <p className="text-sm text-muted-foreground mt-2">
-                  {fileName ? 'Ready! Generate a quiz now' : 'Upload a PDF document to get started.'}
+                  {fileName
+                    ? "Ready! Generate a quiz now"
+                    : "Upload a PDF document to get started."}
                 </p>
                 <div className="flex w-sm items-center space-x-2 mt-5">
-                  <Input type="file" onChange={handleFileChange}/>
+                  <Input type="file" onChange={handleFileChange} />
                 </div>
-                <Button className="mt-5" type="submit" disabled={!fileSelected || loading} onClick={handleGenerateQuiz}>
-                  {loading ? <ButtonLoading /> : 'Generate Quiz'}
+                <Button
+                  className="mt-5"
+                  type="submit"
+                  disabled={!fileSelected || loading}
+                  onClick={handleGenerateQuiz}
+                >
+                  {loading ? <ButtonLoadingQuiz /> : "Generate Quiz"}
                 </Button>
+
+                {quizQuestions && (
+                  <div>
+                    <h2>Quiz Questions:</h2>
+                    <pre>{quizQuestions}</pre>
+                  </div>
+                )}
               </div>
             </div>
           </main>
