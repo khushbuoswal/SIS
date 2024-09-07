@@ -43,6 +43,7 @@ export async function POST(request: NextRequest) {
   }
 
   //Below is where we need to change the structure of the output for the quiz card to correctly display questions based on the response from OpenAI to our prompt
+  //We will be changing our prompt based on pdf so I am leaving this for until we finalise our prompt and then we can fine tune this structure to match our requirements
   function parseQuizData(responseMessage: string) {
     const questions = responseMessage.split(/\n{2,}/);
     
