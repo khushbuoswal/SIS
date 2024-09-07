@@ -20,6 +20,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import QuizCard from "@/components/ui/quiz-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
+import { UserDropdown } from "@/components/ui/userDropdown";
 
 export default function Quiz() {
   // const quizData = [
@@ -99,26 +100,7 @@ export default function Quiz() {
                 <Sidebar />
               </SheetContent>
             </Sheet>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="secondary"
-                  size="icon"
-                  className="rounded-full"
-                >
-                  <CircleUser className="h-5 w-5" />
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Settings</DropdownMenuItem>
-                <DropdownMenuItem>Support</DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>Logout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <UserDropdown />
           </header>
 
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
