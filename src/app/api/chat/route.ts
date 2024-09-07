@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
 
     const responseMessage = completion.choices[0].message?.content;
     if (responseMessage) {
-      console.log("Quiz data from OpenAI:", responseMessage); // Log raw quiz data
+      console.log("Quiz data from OpenAI:", responseMessage);
       
       const parsedQuizData = parseQuizData(responseMessage);
       return NextResponse.json({ quizData: parsedQuizData });
@@ -42,13 +42,14 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  //Below is where we need to change the structure of the output for the quiz card to correctly display questions based on the response from OpenAI to our prompt
   function parseQuizData(responseMessage: string) {
-    const questions = responseMessage.split(/\n{2,}/); // split by two or more newlines
+    const questions = responseMessage.split(/\n{2,}/);
     
     const quizData = questions.map((questionBlock, index) => {
-      const lines = questionBlock.split("\n").filter(line => line); // split lines and filter empty ones
-      const questionText = lines[0].replace(/^Q\d+:\s*/, ""); // remove Q1:, Q2: etc.
-      const options = lines.slice(1, 5).map(option => option.replace(/^\w+\.\s*/, "")); // get options and remove A. B. etc.
+      const lines = questionBlock.split("\n").filter(line => line);
+      const questionText = lines[0].replace(/^Q\d+:\s*/, "");
+      const options = lines.slice(1, 5).map(option => option.replace(/^\w+\.\s*/, ""));
       
       return {
         questionNumber: index + 1,
