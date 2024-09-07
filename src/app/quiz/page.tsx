@@ -11,49 +11,11 @@ import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
 
 export default function Quiz() {
-  // const quizData = [
-  //   {
-  //     questionNumber: 1,
-  //     question: "What is the capital of France?",
-  //     options: ["Paris", "London", "Berlin", "Madrid"],
-  //     points: 0.5,
-  //   },
-  //   {
-  //     questionNumber: 2,
-  //     question: "Which planet is known as the Red Planet?",
-  //     options: ["Earth", "Mars", "Jupiter", "Venus"],
-  //     points: 0.5,
-  //   },
-  //   {
-  //     questionNumber: 3,
-  //     question: "What is the chemical symbol for water?",
-  //     options: ["H2O", "O2", "CO2", "NaCl"],
-  //     points: 0.5,
-  //   },
-  //   {
-  //     questionNumber: 4,
-  //     question: "What is the largest mammal in the world?",
-  //     options: ["Elephant", "Blue Whale", "Giraffe", "Shark"],
-  //     points: 0.5,
-  //   },
-  //   {
-  //     questionNumber: 5,
-  //     question: "Who wrote 'Romeo and Juliet'?",
-  //     options: [
-  //       "William Shakespeare",
-  //       "Charles Dickens",
-  //       "Mark Twain",
-  //       "Leo Tolstoy",
-  //     ],
-  //     points: 0.5,
-  //   },
-  // ];
 
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Load quiz data from the API on component mount
     async function fetchQuizData() {
       setLoading(true);
       try {
@@ -118,15 +80,6 @@ export default function Quiz() {
             >
               <ScrollArea className="h-full w-full">
                 <div className="p-4 lg:p-6 mt-5">
-                {/* {quizData.map((quiz, index) => (
-                    <QuizCard
-                      key={index}
-                      questionNumber={quiz.questionNumber}
-                      question={quiz.question}
-                      options={quiz.options}
-                      points={quiz.points}
-                    />
-                  ))} */}
                   {loading ? (
                     <p>Loading quiz questions...</p>
                   ) : quizData.length > 0 ? (
