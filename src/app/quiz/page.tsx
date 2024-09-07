@@ -1,20 +1,8 @@
 "use client";
-
-import Link from "next/link";
 import { CircleUser, Menu } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import QuizCard from "@/components/ui/quiz-card";
@@ -62,13 +50,31 @@ export default function Quiz() {
   // ];
 
   const [quizData, setQuizData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Load quiz data from local storage
-    const savedQuizData = localStorage.getItem("quizQuestions");
-    if (savedQuizData) {
-      setQuizData(JSON.parse(savedQuizData));
+    // Load quiz data from the API on component mount
+    async function fetchQuizData() {
+      setLoading(true);
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+        });
+        const data = await response.json();
+        if (data.quizData) {
+          setQuizData(data.quizData);
+          localStorage.setItem("quizQuestions", JSON.stringify(data.quizData));
+        } else {
+          console.error("Quiz data is not available in the response");
+        }
+      } catch (error) {
+        console.error("Error fetching quiz data:", error);
+      } finally {
+        setLoading(false);
+      }
     }
+
+    fetchQuizData();
   }, []);
 
   return (
@@ -121,12 +127,20 @@ export default function Quiz() {
                       points={quiz.points}
                     />
                   ))} */}
-                  {quizData ? (
-                    <pre>{quizData}</pre>
+                  {loading ? (
+                    <p>Loading quiz questions...</p>
+                  ) : quizData.length > 0 ? (
+                    quizData.map((quiz, index) => (
+                      <QuizCard
+                        key={index}
+                        questionNumber={quiz.questionNumber}
+                        question={quiz.question}
+                        options={quiz.options}
+                        points={quiz.points}
+                      />
+                    ))
                   ) : (
-                    <p>
-                      No quiz questions available. Please generate a quiz first.
-                    </p>
+                    <p>No quiz questions available. Please generate a quiz first.</p>
                   )}
                   <div className="flex justify-center mt-6">
                     <Button className="mb-3 w-60">Submit Quiz</Button>
