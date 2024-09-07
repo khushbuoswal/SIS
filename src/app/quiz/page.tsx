@@ -13,50 +13,62 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import QuizCard from "@/components/ui/quiz-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 
 export default function Quiz() {
-  const quizData = [
-    {
-      questionNumber: 1,
-      question: "What is the capital of France?",
-      options: ["Paris", "London", "Berlin", "Madrid"],
-      points: 0.5,
-    },
-    {
-      questionNumber: 2,
-      question: "Which planet is known as the Red Planet?",
-      options: ["Earth", "Mars", "Jupiter", "Venus"],
-      points: 0.5,
-    },
-    {
-      questionNumber: 3,
-      question: "What is the chemical symbol for water?",
-      options: ["H2O", "O2", "CO2", "NaCl"],
-      points: 0.5,
-    },
-    {
-      questionNumber: 4,
-      question: "What is the largest mammal in the world?",
-      options: ["Elephant", "Blue Whale", "Giraffe", "Shark"],
-      points: 0.5,
-    },
-    {
-      questionNumber: 5,
-      question: "Who wrote 'Romeo and Juliet'?",
-      options: [
-        "William Shakespeare",
-        "Charles Dickens",
-        "Mark Twain",
-        "Leo Tolstoy",
-      ],
-      points: 0.5,
-    },
-  ];
+  // const quizData = [
+  //   {
+  //     questionNumber: 1,
+  //     question: "What is the capital of France?",
+  //     options: ["Paris", "London", "Berlin", "Madrid"],
+  //     points: 0.5,
+  //   },
+  //   {
+  //     questionNumber: 2,
+  //     question: "Which planet is known as the Red Planet?",
+  //     options: ["Earth", "Mars", "Jupiter", "Venus"],
+  //     points: 0.5,
+  //   },
+  //   {
+  //     questionNumber: 3,
+  //     question: "What is the chemical symbol for water?",
+  //     options: ["H2O", "O2", "CO2", "NaCl"],
+  //     points: 0.5,
+  //   },
+  //   {
+  //     questionNumber: 4,
+  //     question: "What is the largest mammal in the world?",
+  //     options: ["Elephant", "Blue Whale", "Giraffe", "Shark"],
+  //     points: 0.5,
+  //   },
+  //   {
+  //     questionNumber: 5,
+  //     question: "Who wrote 'Romeo and Juliet'?",
+  //     options: [
+  //       "William Shakespeare",
+  //       "Charles Dickens",
+  //       "Mark Twain",
+  //       "Leo Tolstoy",
+  //     ],
+  //     points: 0.5,
+  //   },
+  // ];
+
+  const [quizData, setQuizData] = useState<any[]>([]);
+
+  useEffect(() => {
+    // Load quiz data from local storage
+    const savedQuizData = localStorage.getItem("quizQuestions");
+    if (savedQuizData) {
+      setQuizData(JSON.parse(savedQuizData));
+    }
+  }, []);
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
@@ -118,7 +130,7 @@ export default function Quiz() {
             >
               <ScrollArea className="h-full w-full">
                 <div className="p-4 lg:p-6 mt-5">
-                  {quizData.map((quiz, index) => (
+                {/* {quizData.map((quiz, index) => (
                     <QuizCard
                       key={index}
                       questionNumber={quiz.questionNumber}
@@ -126,7 +138,14 @@ export default function Quiz() {
                       options={quiz.options}
                       points={quiz.points}
                     />
-                  ))}
+                  ))} */}
+                  {quizData ? (
+                    <pre>{quizData}</pre>
+                  ) : (
+                    <p>
+                      No quiz questions available. Please generate a quiz first.
+                    </p>
+                  )}
                   <div className="flex justify-center mt-6">
                     <Button className="mb-3 w-60">Submit Quiz</Button>
                   </div>
