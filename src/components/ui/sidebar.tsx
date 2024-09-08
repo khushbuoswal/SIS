@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Home, LineChart, Settings, PenTool } from "lucide-react";
+import { Home, LineChart, Settings, PenTool, Info } from "lucide-react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -35,6 +35,13 @@ export default function Sidebar() {
             >
               <Settings className="h-4 w-4" />
               Settings
+            </Link>
+            <Link
+              href="/about"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary mb-4"
+            >
+              <Info className="h-4 w-4" />
+              About
             </Link>
           </nav>
         </div>
