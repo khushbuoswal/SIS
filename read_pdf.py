@@ -1,25 +1,25 @@
-import PyPDF2
-import json
+import PyPDF2 
 
-#Hi
+# Function to extract text from a given PDF file
+def extract_text_from_pdf(pdf_path):
+    with open(pdf_path, 'rb') as pdf_file:
+        # Create a PDF reader object
+        reader = PyPDF2.PdfReader(pdf_file)
 
-def read_pdf(file_path):
-    pdf_file = open(file_path, 'rb')
-    read_pdf = PyPDF2.PdfFileReader(pdf_file)
-    num_pages = read_pdf.getNumPages()
-    text = ''
-    for page in range(num_pages):
-        page_obj = read_pdf.getPage(page)
-        text += page_obj.extractText()
-    pdf_file.close() 
-    return text
+        # Initialize a variable to store the extracted text
+        extracted_text = ""
 
-def save_to_json(text, file_path):
-    data = {'text': text}
-    with open(file_path, 'w') as f:
-        json.dump(data, f)
+        # Loop through all the pages
+        for page_num in range(len(reader.pages)):
+            page = reader.pages[page_num]
+            extracted_text += page.extract_text()
 
-# Example usage
-file_path = 'uploaded_pdf.pdf'  # Replace with the uploaded PDF file path
-text = read_pdf(file_path)
-save_to_json(text, 'output.json')  # Replace with the desired JSON file path
+        return extracted_text
+
+if __name__ == "__main__":
+    # Provide the path to the PDF file
+    pdf_file_path = r'C:\Users\14273\OneDrive - UTS\Desktop\Week 1 Worksheet - 14273751.pdf'  # Replace with your actual PDF file path
+
+    # Call the function and print the extracted text
+    pdf_text = extract_text_from_pdf(pdf_file_path)
+    print(pdf_text)

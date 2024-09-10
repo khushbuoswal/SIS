@@ -15,8 +15,20 @@ import { Input } from "@/components/ui/input";
 import { Globe } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
+import { useState } from "react";
+import { ButtonLoadingDashboard } from "@/components/ui/button-loading";
 
 export default function Home() {
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async () => {
+    setLoading(true);
+    setTimeout(() => {
+      // Redirect to /quiz after 3 seconds
+      window.location.href = "/dashboard";
+    }, 1000);
+  };
+
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-4 right-4">
@@ -52,7 +64,7 @@ export default function Home() {
               <div className="flex items-center">
                 <Label>Password</Label>
                 <Link
-                  href="/dashboard" //ONLY TO TEST DASHBOARD PAGE
+                  href="#"
                   className="ml-auto inline-block text-sm underline"
                 >
                   Forgot your password?
@@ -60,12 +72,12 @@ export default function Home() {
               </div>
               <Input id="password" type="password" required />
             </div>
-            <Button type="submit">Login</Button>
+            <Button type="submit" onClick={handleLogin} disabled={loading}>
+              {loading ? <ButtonLoadingDashboard /> : "Login"}
+            </Button>
             <div className="relative flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
-              <span className="mx-5 flex-shrink text-sm text-gray-500">
-                OR
-              </span>
+              <span className="mx-5 flex-shrink text-sm text-gray-500">OR</span>
               <div className="flex-grow border-t border-gray-300"></div>
             </div>
             <Button variant="outline">

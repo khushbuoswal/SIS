@@ -31,3 +31,4 @@
 ### Git Configuration
 
 - Please ensure that the node_modules and .next folders are excluded from version control. These should be added to your .gitignore file automatically, but if not, please manually add.
+- Create a .env.local file and copy everything in .env-example file. Add your OpenAI API key.
