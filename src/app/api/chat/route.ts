@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       messages: [
         {
           role: "user",
-          content: "Generate 5 general ability multiple choice questions with 4 options each, and mark the correct answer.",
+          content: "Please generate 5 general ability multiple-choice questions, each with 4 options. Kindly avoid including the phrase Here are the answers and directly start with the questions.Please also don't do numbering.",
         },
       ],
     });

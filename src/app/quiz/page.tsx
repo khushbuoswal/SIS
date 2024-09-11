@@ -26,29 +26,29 @@ export default function Quiz() {
       return () => clearInterval(timer);
     }, []);
 
-  // useEffect(() => {
-  //   async function fetchQuizData() {
-  //     setLoading(true);
-  //     try {
-  //       const response = await fetch('/api/chat', {
-  //         method: 'POST',
-  //       });
-  //       const data = await response.json();
-  //       if (data.quizData) {
-  //         setQuizData(data.quizData);
-  //         localStorage.setItem("quizQuestions", JSON.stringify(data.quizData));
-  //       } else {
-  //         console.error("Quiz data is not available in the response");
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching quiz data:", error);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
+  useEffect(() => {
+    async function fetchQuizData() {
+      setLoading(true);
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+        });
+        const data = await response.json();
+        if (data.quizData) {
+          setQuizData(data.quizData);
+          localStorage.setItem("quizQuestions", JSON.stringify(data.quizData));
+        } else {
+          console.error("Quiz data is not available in the response");
+        }
+      } catch (error) {
+        console.error("Error fetching quiz data:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  //   fetchQuizData();
-  // }, []);
+    fetchQuizData();
+  }, []);
 
   // Format timer as mm:ss
   const formatTime = (totalSeconds: number) => {
