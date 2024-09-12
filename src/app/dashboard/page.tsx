@@ -1,48 +1,82 @@
-"use client"
-import { Menu } from "lucide-react";
+"use client";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
+import * as pdfjsLib from 'pdfjs-dist';
+import { TextItem } from "pdfjs-dist/types/src/display/api";
+
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
 export default function Dashboard() {
   const [fileSelected, setFileSelected] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [quizQuestions, setQuizQuestions] = useState<string | null>(null);
+  const [quizQuestions, setQuizQuestions] = useState<any>(null);
+  const [pdfText, setPdfText] = useState<string | null>(null);
+
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      setFileName(file.name);
+      setFileSelected(true);
+
+      // Read the PDF file
+      const reader = new FileReader();
+      reader.onload = async function (e) {
+        const target = e.target;
+        if (target && target.result) {
+          const typedArray = new Uint8Array(target.result as ArrayBuffer);
+          const pdf = await pdfjsLib.getDocument(typedArray).promise;
+          let fullText = "";
+
+          // Extract text from each page
+          for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            const page = await pdf.getPage(pageNum);
+            const textContent = await page.getTextContent();
+            const textItems = textContent.items
+              .filter((item): item is TextItem => "str" in item)
+              .map((item) => (item as TextItem).str);
+            fullText += textItems.join(" ");
+          }
+          setPdfText(fullText); // Store extracted text
+        } else {
+          console.error("Error: e.target or e.target.result is null.");
+        }
+      };
+      reader.readAsArrayBuffer(file); // Trigger the reader
+    } else {
+      setFileName(null);
+      setFileSelected(false);
+    }
+  };
 
   const fetchQuizQuestions = async () => {
+    if (!pdfText) return;
+
     setLoading(true);
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ pdfText }),
       });
 
       const data = await response.json();
-      setQuizQuestions(data.message);
+      setQuizQuestions(data.quizData);
 
       // Save to local storage
-      localStorage.setItem("quizQuestions", JSON.stringify(data.message));
+      localStorage.setItem("quizQuestions", JSON.stringify(data.quizData));
     } catch (error) {
       console.error("Error fetching quiz questions:", error);
       setQuizQuestions("An error occurred while fetching quiz questions.");
     }
     setLoading(false);
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    if (files && files.length > 0) {
-      setFileName(files[0].name); // Set the file name
-      setFileSelected(true);
-    } else {
-      setFileName(null);
-      setFileSelected(false);
-    }
   };
 
   const handleGenerateQuiz = async () => {
@@ -59,24 +93,8 @@ export default function Dashboard() {
       <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
         <Sidebar />
 
-        {/* LEFT-SIDE NAVBAR UPON SCREEN RESIZE */}
         <div className="flex flex-col">
           <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="shrink-0 md:hidden"
-                >
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Toggle navigation menu</span>
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="left" className="flex flex-col">
-              <Sidebar />
-              </SheetContent>
-            </Sheet>
             <UserDropdown />
           </header>
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
@@ -87,7 +105,6 @@ export default function Dashboard() {
             </div>
             <div
               className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-              x-chunk="dashboard-02-chunk-1"
             >
               <div className="flex flex-col items-center gap-1 text-center mb-10">
                 <h3 className="text-2xl font-bold tracking-tight">
@@ -99,7 +116,7 @@ export default function Dashboard() {
                     : "Upload a PDF document to get started."}
                 </p>
                 <div className="flex w-sm items-center space-x-2 mt-5">
-                  <Input type="file" onChange={handleFileChange} />
+                  <Input type="file" accept="application/pdf" onChange={handleFileChange} />
                 </div>
                 <Button
                   className="mt-5"
@@ -107,13 +124,13 @@ export default function Dashboard() {
                   disabled={!fileSelected || loading}
                   onClick={handleGenerateQuiz}
                 >
-                  {loading ? <ButtonLoadingQuiz /> : "Generate Quiz"}
+                  {loading ? "Loading..." : "Generate Quiz"}
                 </Button>
 
                 {quizQuestions && (
                   <div>
                     <h2>Quiz Questions:</h2>
-                    <pre>{quizQuestions}</pre>
+                    <pre>{JSON.stringify(quizQuestions, null, 2)}</pre>
                   </div>
                 )}
               </div>
