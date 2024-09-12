@@ -11,43 +11,28 @@ import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
 
 export default function Quiz() {
-
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(0);
 
-    // Timer logic
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setSeconds((prevSeconds) => prevSeconds + 1);
-      }, 1000);
-  
-      // Cleanup timer on component unmount
-      return () => clearInterval(timer);
-    }, []);
+  // Timer logic
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    // Cleanup timer on component unmount
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
-    async function fetchQuizData() {
-      setLoading(true);
-      try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-        });
-        const data = await response.json();
-        if (data.quizData) {
-          setQuizData(data.quizData);
-          localStorage.setItem("quizQuestions", JSON.stringify(data.quizData));
-        } else {
-          console.error("Quiz data is not available in the response");
-        }
-      } catch (error) {
-        console.error("Error fetching quiz data:", error);
-      } finally {
-        setLoading(false);
-      }
+    // Load quiz data from localStorage
+    const storedQuizQuestions = localStorage.getItem("quizQuestions");
+    if (storedQuizQuestions) {
+      setQuizData(JSON.parse(storedQuizQuestions));
+    } else {
+      console.error("No quiz questions found in local storage");
     }
-
-    fetchQuizData();
   }, []);
 
   // Format timer as mm:ss
@@ -59,7 +44,6 @@ export default function Quiz() {
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
-
       <div className="absolute top-2 right-4">
         <ModeToggle />
       </div>
