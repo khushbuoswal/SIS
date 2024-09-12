@@ -26,6 +26,9 @@ export async function POST(request: NextRequest) {
         {
           role: "user",
           content: `Based on the following text, generate 5 multiple-choice questions, each with 4 options. Avoid numbering the questions and directly start with the questions:\n\n"${pdfText}"`,
+          //while the above works for most info PDFs, we need to ensure random PDFs like resumes and lecture slides have adequate display
+          //Also note that pdf.worker.min.mjs which handles this is a copy and is present in both node modules and public
+          //front end needs fixes for specific PDFs and there is a loading delay with different unnecessary displays that need fixing
         },
       ],
     });
