@@ -10,7 +10,6 @@ import { TextItem } from "pdfjs-dist/types/src/display/api";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
-
 export default function Dashboard() {
   const [fileSelected, setFileSelected] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
