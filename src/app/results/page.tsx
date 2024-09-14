@@ -12,6 +12,9 @@ import { UserDropdown } from "@/components/ui/userDropdown";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [score, setScore] = useState(0); // Add score state
+  const [time, setTime] = useState("00:00"); // Add time state
+
   
   useEffect(() => {
     // Load quiz data from localStorage
@@ -21,6 +24,11 @@ export default function Quiz() {
     } else {
       console.error("No quiz questions found in local storage");
     }
+
+    // Placeholder: Set score and time
+    setScore(85); // Example score, adjust based on actual logic
+    setTime("12:34"); // Example time, adjust based on actual logic
+
   }, []);
 
   return (
@@ -56,10 +64,16 @@ export default function Quiz() {
           </header>
 
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-            {/* Title and Timer Section */}
-            <div className="flex items-center justify-between w-full">
+            {/* Title Section */}
+            <div className="w-full">
               <h1 className="text-lg font-semibold md:text-2xl">Results Page</h1>
+              {/* Score and Time Section */}
+              <div className="mt-2 flex justify-between">
+                <p className="text-sm md:text-lg">Score: {score}</p>
+                <p className="text-sm md:text-lg">Time: {time}</p>
+              </div>
             </div>
+
 
             <div
               className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
