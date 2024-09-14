@@ -12,17 +12,22 @@ import { UserDropdown } from "@/components/ui/userDropdown";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [seconds, setSeconds] = useState(0);
+  const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
+  const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer stat
 
-  // Timer logic
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setSeconds((prevSeconds) => prevSeconds + 1);
+ // Timer logic
+ useEffect(() => {
+  let timer: NodeJS.Timeout;
+  if (isTimerRunning && seconds > 0) {
+    timer = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds - 1);
     }, 1000);
+  }
 
-    // Cleanup timer on component unmount
-    return () => clearInterval(timer);
-  }, []);
+  // Cleanup timer on component unmount or when timer stops
+  return () => clearInterval(timer);
+}, [isTimerRunning, seconds]);
+
 
   useEffect(() => {
     // Load quiz data from localStorage
@@ -34,12 +39,18 @@ export default function Quiz() {
     }
   }, []);
 
-  // Format timer as mm:ss
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
     const remainingSeconds = totalSeconds % 60;
     return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
   };
+
+// Handle quiz submission
+const handleSubmit = () => {
+  setIsTimerRunning(false); // Stop the timer when the quiz is submitted
+  console.log("Quiz submitted");
+};
+
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
