@@ -93,7 +93,7 @@ export default function Quiz() {
                       />
                     ))
                   ) : (
-                    <p>No quiz questions available. Please generate a quiz first.</p>
+                    <p> </p>
                   )}
                 </div>
               </ScrollArea>
