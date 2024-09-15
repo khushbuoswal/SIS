@@ -114,7 +114,9 @@ export default function Quiz() {
                     <p></p>
                   )}
                   <div className="flex justify-center mt-6">
+                    <a href="http://localhost:3000/results">
                       <Button className="mb-3 w-60">Submit Quiz</Button>
+                    </a>
                   </div>
                 </div>
               </ScrollArea>
