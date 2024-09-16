@@ -112,7 +112,8 @@ const handleSubmit = () => {
                     <p>No quiz questions available. Please generate a quiz first.</p>
                   )}
                   <div className="flex justify-center mt-6">
-                    <Button className="mb-3 w-60">Submit Quiz</Button>
+                    <a href ="/results">
+                    <Button className="mb-3 w-60">Submit Quiz</Button></a>
                   </div>
                 </div>
               </ScrollArea>
