@@ -15,6 +15,7 @@ export default function Quiz() {
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
+  const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
   const router = useRouter(); // Initialize useRouter
 
   // Timer logic
@@ -108,7 +109,6 @@ export default function Quiz() {
                         question={quiz.question}
                         options={quiz.options}
                         points={quiz.points}
-                        
                       />
                     ))
                   ) : (
@@ -116,8 +116,9 @@ export default function Quiz() {
                   )}
                   <div className="flex justify-center mt-6">
                     <a href="http://localhost:3000/results">
-                      <Button className="mb-3 w-60">Submit Quiz</Button>
+                      <Button className="mb-3 w-60" onClick={handleSubmit} >Submit Quiz</Button>
                     </a>
+
                   </div>
                 </div>
               </ScrollArea>

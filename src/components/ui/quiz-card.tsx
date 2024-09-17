@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { Label } from "@/components/ui/label";
+import { useState } from "react";
 
 interface QuizCardProps {
   questionNumber: number;
@@ -15,8 +15,15 @@ export default function QuizCard({
   options,
   points,
 }: QuizCardProps) {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null); 
+
+  const handleOptionChange = (option: string) => {
+    setSelectedOption(option); 
+    console.log(option)
+  };
+
   return (
-    <Card className="mb-10 mx-auto max-w-lg ">
+    <Card className="mb-10 mx-auto max-w-lg">
       <CardHeader className="flex justify-between bg-secondary p-4 rounded-sm">
         <CardTitle className="text-xl">Question {questionNumber}</CardTitle>
         <div className="font-semibold">{points} Points</div>
@@ -26,7 +33,13 @@ export default function QuizCard({
         {options.map((option, index) => (
           <div key={index} className="mb-2">
             <label className="flex items-center gap-2 hover:text-primary">
-              <input type="radio" onChange={() => console.log(option)} name={`question-${questionNumber}`} />
+              <input
+                type="radio"
+                name={`question-${questionNumber}`}
+                value={option}
+                checked={selectedOption === option} 
+                onChange={() => handleOptionChange(option)}
+              />
               <span>{option}</span>
             </label>
             <Separator className="mt-3" />
