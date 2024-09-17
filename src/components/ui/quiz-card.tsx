@@ -26,7 +26,7 @@ export default function QuizCard({
         {options.map((option, index) => (
           <div key={index} className="mb-2">
             <label className="flex items-center gap-2 hover:text-primary">
-              <input type="radio" name={`question-${questionNumber}`} />
+              <input type="radio" onChange={() => console.log(option)} name={`question-${questionNumber}`} />
               <span>{option}</span>
             </label>
             <Separator className="mt-3" />

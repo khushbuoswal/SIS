@@ -108,6 +108,7 @@ export default function Quiz() {
                         question={quiz.question}
                         options={quiz.options}
                         points={quiz.points}
+                        
                       />
                     ))
                   ) : (
