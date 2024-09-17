@@ -73,22 +73,7 @@ export default function Quiz() {
                 <p className="text-sm md:text-lg">Time: {time}</p>
               </div>
             </div>
-            <div className="p-4 lg:p-6 mt-5">
-                  {loading ? (
-                    <p>Loading quiz questions...</p>
-                  ) : quizData.length > 0 ? (
-                    quizData.map((quiz, index) => (
-                      <div>
-                        {quiz.question}
-                        {quiz.selectedOption}
-                        {console.log(quiz)}
-                        </div>
-                      
-                    ))
-                  ) : (
-                    <p> </p>
-                  )}
-                </div>
+            
 
 
             <div
