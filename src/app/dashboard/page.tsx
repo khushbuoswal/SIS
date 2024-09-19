@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import Sidebar from "@/components/ui/sidebar";
+import { Switch } from "@/components/ui/switch"
 import { UserDropdown } from "@/components/ui/userDropdown";
 import * as pdfjsLib from 'pdfjs-dist';
 import { TextItem } from "pdfjs-dist/types/src/display/api";
@@ -16,6 +17,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(false);
   const [quizQuestions, setQuizQuestions] = useState<any>(null);
   const [pdfText, setPdfText] = useState<string | null>(null);
+  const [isSwitchOn, setIsSwitchOn] = useState(false);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
@@ -84,6 +86,11 @@ export default function Dashboard() {
     window.location.href = "/quiz";
   };
 
+  const handleSwitchChange = (checked: boolean) => {
+    setIsSwitchOn(checked);
+    localStorage.setItem("examMode", JSON.stringify(checked));
+  };
+
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-2 right-4">
@@ -106,7 +113,16 @@ export default function Dashboard() {
             <div
               className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
             >
+
               <div className="flex flex-col items-center gap-1 text-center mb-10">
+                <div className="flex items-center space-x-2 mb-8">
+                  <Switch
+                    checked={isSwitchOn}
+                    onCheckedChange={handleSwitchChange}
+                    id="document-switch"
+                  />
+                  <label htmlFor="document-switch">Exam Mode</label>
+                </div>
                 <h3 className="text-2xl font-bold tracking-tight">
                   {fileName ? fileName : "You have no document uploaded"}
                 </h3>
