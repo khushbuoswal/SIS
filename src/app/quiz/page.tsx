@@ -15,7 +15,16 @@ export default function Quiz() {
   const [loading, setLoading] = useState(false);
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
+  const [isExamMode, setIsExamMode] = useState(false); // Exam mode state
   const router = useRouter(); // Initialize useRouter
+
+  // Check Exam Mode from localStorage on component mount
+  useEffect(() => {
+    const storedExamMode = localStorage.getItem("examMode");
+    if (storedExamMode) {
+      setIsExamMode(JSON.parse(storedExamMode));
+    }
+  }, []);
 
   // Timer logic
   useEffect(() => {
@@ -42,7 +51,11 @@ export default function Quiz() {
     } else {
       console.error("No quiz questions found in local storage");
     }
-  }, []);
+    // Start the timer if Exam Mode is enabled
+    if (isExamMode) {
+      setIsTimerRunning(true);
+    }
+  }, [isExamMode]);
 
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
@@ -92,7 +105,9 @@ export default function Quiz() {
             {/* Title and Timer Section */}
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-semibold md:text-2xl">Quiz Mode</h1>
-              <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
+              {isExamMode && (
+                <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
+              )}
             </div>
 
             <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
