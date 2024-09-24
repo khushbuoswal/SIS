@@ -29,19 +29,18 @@ export default function Quiz() {
   // Timer logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (isTimerRunning && seconds > 0) {
+    if (isExamMode && isTimerRunning && seconds > 0) { // Only run timer in Exam Mode
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
     } else if (seconds === 0) {
       alert("Times up!");
-      // Redirect to the next page when the timer hits zero
-      router.push("/results");
+      router.push("/results"); // Redirect to the results page when timer ends
     }
 
     // Cleanup timer on component unmount or when timer stops
     return () => clearInterval(timer);
-  }, [isTimerRunning, seconds, router]);
+  }, [isTimerRunning, seconds, isExamMode, router]);
 
   useEffect(() => {
     // Load quiz data from localStorage
@@ -105,6 +104,7 @@ export default function Quiz() {
             {/* Title and Timer Section */}
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-semibold md:text-2xl">Quiz Mode</h1>
+              {/* Timer visible only if Exam Mode is enabled */}
               {isExamMode && (
                 <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
               )}
