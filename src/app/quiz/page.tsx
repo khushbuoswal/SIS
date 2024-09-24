@@ -9,6 +9,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
 import { useRouter } from "next/navigation"; // Import useRouter
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
@@ -16,6 +23,7 @@ export default function Quiz() {
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
   const [isExamMode, setIsExamMode] = useState(false); // Exam mode state
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog open state
   const router = useRouter(); // Initialize useRouter
 
   // Check Exam Mode from localStorage on component mount
@@ -34,8 +42,8 @@ export default function Quiz() {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
     } else if (seconds === 0) {
-      alert("Times up!");
-      router.push("/results"); // Redirect to the results page when timer ends
+      setIsTimerRunning(false); // Stop the timer
+      setIsDialogOpen(true); // Open the dialog when the timer runs out
     }
 
     // Cleanup timer on component unmount or when timer stops
@@ -66,6 +74,11 @@ export default function Quiz() {
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
     console.log("Quiz submitted");
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+    router.push("/results"); // Redirect to the results page after closing the dialog
   };
 
   return (
@@ -130,7 +143,7 @@ export default function Quiz() {
                   )}
                   <div className="flex justify-center mt-6">
                     <a href="http://localhost:3000/results">
-                      <Button className="mb-3 w-60">Submit Quiz</Button>
+                      <Button className="mb-3 w-60" onClick={handleSubmit}>Submit Quiz</Button>
                     </a>
                   </div>
                 </div>
@@ -139,6 +152,19 @@ export default function Quiz() {
           </main>
         </div>
       </div>
+
+      {/* Dialog Component */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Time up!</DialogTitle>
+            <DialogDescription>
+              The quiz time is over. You will be redirected to the results page.
+            </DialogDescription>
+            <Button onClick={handleDialogClose}>OK</Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
