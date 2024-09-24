@@ -18,6 +18,15 @@ export default function Quiz() {
   const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
   const router = useRouter(); // Initialize useRouter
 
+
+  const handleAnswerSelection = (questionNumber: number, selection: string) => {
+    setUserAnswers((prevAnswers: any) => ({
+      ...prevAnswers,
+      [questionNumber]: selection,
+    }));
+  };
+
+
   // Timer logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -54,6 +63,7 @@ export default function Quiz() {
   // Handle quiz submission
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
+    console.log(userAnswers)
     console.log("Quiz submitted");
   };
 
@@ -109,6 +119,7 @@ export default function Quiz() {
                         question={quiz.question}
                         options={quiz.options}
                         points={quiz.points}
+                        handleAnswerSelection={handleAnswerSelection}
                       />
                     ))
                   ) : (

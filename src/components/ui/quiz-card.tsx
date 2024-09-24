@@ -7,6 +7,7 @@ interface QuizCardProps {
   question: string;
   options: string[];
   points: number;
+  handleAnswerSelection:Function
 }
 
 export default function QuizCard({
@@ -14,12 +15,15 @@ export default function QuizCard({
   question,
   options,
   points,
+  handleAnswerSelection
 }: QuizCardProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null); 
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option); 
+    console.log("hello from " + questionNumber)
     console.log(option)
+    handleAnswerSelection(questionNumber, option)
   };
 
   return (
