@@ -1,17 +1,19 @@
 import { useState } from "react";
 
+export default function QuizStore() {
 
-const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
-
-
-export const handleAnswerSelection = (questionNumber: number, selection: string) => {
-    setUserAnswers((prevAnswers: any) => ({
-      ...prevAnswers,
-      [questionNumber]: selection,
-    }));
-  };
+  const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
 
 
-export const getUserAnswers = () => {
-return userAnswers
+  const handleAnswerSelectionExternal = (questionNumber: number, selection: string) => {
+      setUserAnswers((prevAnswers: any) => ({
+        ...prevAnswers,
+        [questionNumber]: selection,
+      }));
+    };
+
+
+  const getUserAnswers = () => {
+    return userAnswers
+  }
 }

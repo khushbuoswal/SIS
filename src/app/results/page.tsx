@@ -25,6 +25,14 @@ export default function Quiz() {
       console.error("No quiz questions found in local storage");
     }
 
+    const submittedAnswers = localStorage.getItem("userAnswers");
+    if(submittedAnswers) {
+      console.log("submitted answers are...");
+      console.log(submittedAnswers);
+    } else {
+      console.error("No submitted answers found in local storage");
+    }
+
     // Placeholder: Set score and time
     setScore(85); // Example score, adjust based on actual logic
     setTime("12:34"); // Example time, adjust based on actual logic

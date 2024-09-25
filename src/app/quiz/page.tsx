@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+//import { getUserAnswers, handleAnswerSelectionExternal } from "./quizStore";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
@@ -84,6 +85,8 @@ export default function Quiz() {
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
     console.log(userAnswers)
+    // Save to local storage
+    localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
     console.log("Quiz submitted");
   };
 
