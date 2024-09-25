@@ -9,6 +9,13 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
 import { useRouter } from "next/navigation"; // Import useRouter
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
@@ -16,6 +23,8 @@ export default function Quiz() {
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
   const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
+  const [isExamMode, setIsExamMode] = useState(false); // Exam mode state
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog open state
   const router = useRouter(); // Initialize useRouter
 
 
@@ -27,22 +36,29 @@ export default function Quiz() {
   };
 
 
+  // Check Exam Mode from localStorage on component mount
+  useEffect(() => {
+    const storedExamMode = localStorage.getItem("examMode");
+    if (storedExamMode) {
+      setIsExamMode(JSON.parse(storedExamMode));
+    }
+  }, []);
+
   // Timer logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (isTimerRunning && seconds > 0) {
+    if (isExamMode && isTimerRunning && seconds > 0) { // Only run timer in Exam Mode
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
     } else if (seconds === 0) {
-      alert("Times up!");
-      // Redirect to the next page when the timer hits zero
-      router.push("/results");
+      setIsTimerRunning(false); // Stop the timer
+      setIsDialogOpen(true); // Open the dialog when the timer runs out
     }
 
     // Cleanup timer on component unmount or when timer stops
     return () => clearInterval(timer);
-  }, [isTimerRunning, seconds, router]);
+  }, [isTimerRunning, seconds, isExamMode, router]);
 
   useEffect(() => {
     // Load quiz data from localStorage
@@ -52,7 +68,11 @@ export default function Quiz() {
     } else {
       console.error("No quiz questions found in local storage");
     }
-  }, []);
+    // Start the timer if Exam Mode is enabled
+    if (isExamMode) {
+      setIsTimerRunning(true);
+    }
+  }, [isExamMode]);
 
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
@@ -65,6 +85,11 @@ export default function Quiz() {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
     console.log(userAnswers)
     console.log("Quiz submitted");
+  };
+
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+    router.push("/results"); // Redirect to the results page after closing the dialog
   };
 
   return (
@@ -103,7 +128,10 @@ export default function Quiz() {
             {/* Title and Timer Section */}
             <div className="flex items-center justify-between w-full">
               <h1 className="text-lg font-semibold md:text-2xl">Quiz Mode</h1>
-              <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
+              {/* Timer visible only if Exam Mode is enabled */}
+              {isExamMode && (
+                <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
+              )}
             </div>
 
             <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
@@ -137,6 +165,19 @@ export default function Quiz() {
           </main>
         </div>
       </div>
+
+      {/* Dialog Component */}
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Time up!</DialogTitle>
+            <DialogDescription>
+              The quiz time is over. You will be redirected to the results page.
+            </DialogDescription>
+            <Button onClick={handleDialogClose}>OK</Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }

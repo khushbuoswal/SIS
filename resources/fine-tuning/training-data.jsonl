@@ -1,0 +1,373 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Based on the provided text, generate 5 quiz questions, each in the following JSON format: {\"Quiz Question Number\": X, \"Question\": \"\", \"Option 1\": \"\", \"Option 2\": \"\", \"Option 3\": \"\", \"Option 4\": \"\", \"Correct Answer\": \"\", \"Reference from Source\": \"\"}. The Reference from Source should refer to a Page number and Paragraph Number on the page from the provided source."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "Quiz Question Number": 1,
+          "Question": "What is the main principle behind quantum computing?",
+          "Option 1": "Superposition",
+          "Option 2": "Classical bit operations",
+          "Option 3": "Cloud computing",
+          "Option 4": "Cryptography",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 4, Paragraph 2"
+        },
+        {
+          "Quiz Question Number": 2,
+          "Question": "What is the Capital of France?",
+          "Option 1": "Sydney",
+          "Option 2": "Rome",
+          "Option 3": "Paris",
+          "Option 4": "Berlin",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 3, Paragraph 4"
+        },
+        {
+          "Quiz Question Number": 3,
+          "Question": "What is the atomic number of hydrogen?",
+          "Option 1": "2",
+          "Option 2": "1",
+          "Option 3": "3",
+          "Option 4": "4",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 5, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 4,
+          "Question": "Who developed the theory of general relativity?",
+          "Option 1": "John Abrham",
+          "Option 2": "Isaac Newton",
+          "Option 3": "Galileo Galilei",
+          "Option 4": "Albert Einstein",
+          "Correct Answer": "Option 4",
+          "Reference from Source": "Page 2, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 5,
+          "Question": "What is the largest planet in our solar system?",
+          "Option 1": "Earth",
+          "Option 2": "Mars",
+          "Option 3": "Jupiter",
+          "Option 4": "Venus",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 7, Paragraph 4"
+        }
+      ]
+    }
+  ]
+},
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Based on the provided text, generate 5 quiz questions, each in the following JSON format: {\"Quiz Question Number\": X, \"Question\": \"\", \"Option 1\": \"\", \"Option 2\": \"\", \"Option 3\": \"\", \"Option 4\": \"\", \"Correct Answer\": \"\", \"Reference from Source\": \"\"}. The Reference from Source should refer to a Page number and Paragraph Number on the page from the provided source."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "Quiz Question Number": 1,
+          "Question": "What is the chemical symbol for water?",
+          "Option 1": "H",
+          "Option 2": "O",
+          "Option 3": "H2O",
+          "Option 4": "HO2",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 10, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 2,
+          "Question": "Who is known as the father of computer science?",
+          "Option 1": "Alan Turing",
+          "Option 2": "Charles Babbage",
+          "Option 3": "John von Neumann",
+          "Option 4": "Tim Berners-Lee",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 8, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 3,
+          "Question": "What year did the first man land on the moon?",
+          "Option 1": "1969",
+          "Option 2": "1972",
+          "Option 3": "1959",
+          "Option 4": "1980",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 12, Paragraph 2"
+        },
+        {
+          "Quiz Question Number": 4,
+          "Question": "Which element is represented by the symbol 'Au'?",
+          "Option 1": "Silver",
+          "Option 2": "Gold",
+          "Option 3": "Aluminum",
+          "Option 4": "Iron",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 15, Paragraph 5"
+        },
+        {
+          "Quiz Question Number": 5,
+          "Question": "What is the smallest planet in the solar system?",
+          "Option 1": "Venus",
+          "Option 2": "Mars",
+          "Option 3": "Mercury",
+          "Option 4": "Pluto",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 6, Paragraph 3"
+        }
+      ]
+    }
+  ]
+}
+
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Based on the provided text, generate 5 quiz questions, each in the following JSON format: {\"Quiz Question Number\": X, \"Question\": \"\", \"Option 1\": \"\", \"Option 2\": \"\", \"Option 3\": \"\", \"Option 4\": \"\", \"Correct Answer\": \"\", \"Reference from Source\": \"\"}. The Reference from Source should refer to a Page number and Paragraph Number on the page from the provided source."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "Quiz Question Number": 1,
+          "Question": "What is the smallest unit of matter?",
+          "Option 1": "Atom",
+          "Option 2": "Molecule",
+          "Option 3": "Cell",
+          "Option 4": "Electron",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 9, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 2,
+          "Question": "Who wrote the play 'Romeo and Juliet'?",
+          "Option 1": "Charles Dickens",
+          "Option 2": "Mark Twain",
+          "Option 3": "William Shakespeare",
+          "Option 4": "George Orwell",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 13, Paragraph 4"
+        },
+        {
+          "Quiz Question Number": 3,
+          "Question": "What is the chemical formula for table salt?",
+          "Option 1": "Na",
+          "Option 2": "NaCl",
+          "Option 3": "Cl",
+          "Option 4": "HCl",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 16, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 4,
+          "Question": "Which country is known as the Land of the Rising Sun?",
+          "Option 1": "China",
+          "Option 2": "South Korea",
+          "Option 3": "Japan",
+          "Option 4": "Thailand",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 20, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 5,
+          "Question": "Who painted the Mona Lisa?",
+          "Option 1": "Michelangelo",
+          "Option 2": "Vincent van Gogh",
+          "Option 3": "Leonardo da Vinci",
+          "Option 4": "Pablo Picasso",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 18, Paragraph 2"
+        }
+      ]
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "Quiz Question Number": 1,
+          "Question": "Which planet is closest to the Sun?",
+          "Option 1": "Earth",
+          "Option 2": "Mars",
+          "Option 3": "Venus",
+          "Option 4": "Mercury",
+          "Correct Answer": "Option 4",
+          "Reference from Source": "Page 14, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 2,
+          "Question": "Who discovered penicillin?",
+          "Option 1": "Marie Curie",
+          "Option 2": "Alexander Fleming",
+          "Option 3": "Isaac Newton",
+          "Option 4": "Albert Einstein",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 19, Paragraph 2"
+        },
+        {
+          "Quiz Question Number": 3,
+          "Question": "Which gas is essential for human respiration?",
+          "Option 1": "Nitrogen",
+          "Option 2": "Oxygen",
+          "Option 3": "Carbon Dioxide",
+          "Option 4": "Helium",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 12, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 4,
+          "Question": "Who is the author of '1984'?",
+          "Option 1": "George Orwell",
+          "Option 2": "Aldous Huxley",
+          "Option 3": "J.K. Rowling",
+          "Option 4": "Ernest Hemingway",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 21, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 5,
+          "Question": "What is the boiling point of water at sea level?",
+          "Option 1": "90°C",
+          "Option 2": "110°C",
+          "Option 3": "100°C",
+          "Option 4": "120°C",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 10, Paragraph 4"
+        }
+      ]
+    }
+  ]
+}
+
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Based on the provided text, generate 5 quiz questions, each in the following JSON format: {\"Quiz Question Number\": X, \"Question\": \"\", \"Option 1\": \"\", \"Option 2\": \"\", \"Option 3\": \"\", \"Option 4\": \"\", \"Correct Answer\": \"\", \"Reference from Source\": \"\"}. The Reference from Source should refer to a Page number and Paragraph Number on the page from the provided source."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "Quiz Question Number": 1,
+          "Question": "What is the main principle behind quantum computing?",
+          "Option 1": "Superposition",
+          "Option 2": "Classical bit operations",
+          "Option 3": "Cloud computing",
+          "Option 4": "Cryptography",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 4, Paragraph 2"
+        },
+        {
+          "Quiz Question Number": 2,
+          "Question": "What is the Capital of France?",
+          "Option 1": "Sydney",
+          "Option 2": "Rome",
+          "Option 3": "Paris",
+          "Option 4": "Berlin",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 3, Paragraph 4"
+        },
+        {
+          "Quiz Question Number": 3,
+          "Question": "What is the atomic number of hydrogen?",
+          "Option 1": "2",
+          "Option 2": "1",
+          "Option 3": "3",
+          "Option 4": "4",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 5, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 4,
+          "Question": "Who developed the theory of general relativity?",
+          "Option 1": "John Abrham",
+          "Option 2": "Isaac Newton",
+          "Option 3": "Galileo Galilei",
+          "Option 4": "Albert Einstein",
+          "Correct Answer": "Option 4",
+          "Reference from Source": "Page 2, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 5,
+          "Question": "What is the largest planet in our solar system?",
+          "Option 1": "Earth",
+          "Option 2": "Mars",
+          "Option 3": "Jupiter",
+          "Option 4": "Venus",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 7, Paragraph 4"
+        }
+      ]
+    }
+  ]
+}
+
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Based on the provided text, generate 5 quiz questions, each in the following JSON format: {\"Quiz Question Number\": X, \"Question\": \"\", \"Option 1\": \"\", \"Option 2\": \"\", \"Option 3\": \"\", \"Option 4\": \"\", \"Correct Answer\": \"\", \"Reference from Source\": \"\"}. The Reference from Source should refer to a Page number and Paragraph Number on the page from the provided source."
+    },
+    {
+      "role": "assistant",
+      "content": [
+        {
+          "Quiz Question Number": 1,
+          "Question": "What is the smallest unit of matter?",
+          "Option 1": "Atom",
+          "Option 2": "Molecule",
+          "Option 3": "Cell",
+          "Option 4": "Electron",
+          "Correct Answer": "Option 1",
+          "Reference from Source": "Page 9, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 2,
+          "Question": "Who wrote the play 'Romeo and Juliet'?",
+          "Option 1": "Charles Dickens",
+          "Option 2": "Mark Twain",
+          "Option 3": "William Shakespeare",
+          "Option 4": "George Orwell",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 13, Paragraph 4"
+        },
+        {
+          "Quiz Question Number": 3,
+          "Question": "What is the chemical formula for table salt?",
+          "Option 1": "Na",
+          "Option 2": "NaCl",
+          "Option 3": "Cl",
+          "Option 4": "HCl",
+          "Correct Answer": "Option 2",
+          "Reference from Source": "Page 16, Paragraph 3"
+        },
+        {
+          "Quiz Question Number": 4,
+          "Question": "Which country is known as the Land of the Rising Sun?",
+          "Option 1": "China",
+          "Option 2": "South Korea",
+          "Option 3": "Japan",
+          "Option 4": "Thailand",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 20, Paragraph 1"
+        },
+        {
+          "Quiz Question Number": 5,
+          "Question": "Who painted the Mona Lisa?",
+          "Option 1": "Michelangelo",
+          "Option 2": "Vincent van Gogh",
+          "Option 3": "Leonardo da Vinci",
+          "Option 4": "Pablo Picasso",
+          "Correct Answer": "Option 3",
+          "Reference from Source": "Page 18, Paragraph 2"
+        }
+      ]
+    }
+  ]
+}
