@@ -2,25 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 
-// interface QuizCardProps {
-//   questionNumber: number;
-//   question: string;
-//   options: string[];
-//   points: number;
-// }
-
 interface QuizCardProps {
   questionNumber: number;
   question: string;
   options: string[];
 }
-
-// export default function QuizCard({
-//   questionNumber,
-//   question,
-//   options,
-//   points,
-// }: QuizCardProps) {
 
 export default function QuizCard({
   questionNumber,
