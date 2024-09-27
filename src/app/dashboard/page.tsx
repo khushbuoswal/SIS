@@ -143,13 +143,6 @@ export default function Dashboard() {
                 >
                   {loading ? <ButtonLoadingQuiz />: "Generate Quiz"}
                 </Button>
-
-                {quizQuestions && (
-                  <div>
-                    <h2>Quiz Questions:</h2>
-                    <pre>{JSON.stringify(quizQuestions, null, 2)}</pre>
-                  </div>
-                )}
               </div>
             </div>
           </main>
