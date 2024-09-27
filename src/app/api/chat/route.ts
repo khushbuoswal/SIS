@@ -19,20 +19,6 @@ export async function POST(request: NextRequest) {
       apiKey: process.env.OPENAI_API_KEY,
     });
 
-    // Use the extracted text from the PDF to generate questions
-    // const completion = await openai.chat.completions.create({
-    //   model: "gpt-4o-mini",
-    //   messages: [
-    //     {
-    //       role: "user",
-    //       content: `Based on the following text, generate 5 multiple-choice questions, each with 4 options. Avoid numbering the questions and directly start with the questions:\n\n"${pdfText}"`,
-    //       //while the above works for most info PDFs, we need to ensure random PDFs like resumes and lecture slides have adequate display
-    //       //Also note that pdf.worker.min.mjs which handles this is a copy and is present in both node modules and public
-    //       //front end needs fixes for specific PDFs and there is a loading delay with different unnecessary displays that need fixing
-    //     },
-    //   ],
-    // });
-
     // Use the fine-tuned model to generate questions
     const completion = await openai.chat.completions.create({
       model: "ft:gpt-4o-mini-2024-07-18:karan-openai:quizzly-v2:ABhTUCY9", // Updated to fine-tuned model
