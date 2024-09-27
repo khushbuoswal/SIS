@@ -54,7 +54,6 @@ export async function POST(request: NextRequest) {
     if (responseMessage) {
       const parsedQuizData = JSON.parse(responseMessage);
       console.log(parsedQuizData);
-      // const parsedQuizData = parseQuizData(responseMessage);
       return NextResponse.json({ quizData: parsedQuizData });
     } else {
       return NextResponse.json(
@@ -70,27 +69,3 @@ export async function POST(request: NextRequest) {
     );
   }
 }
-
-// Function to parse the quiz data from OpenAI's response
-// function parseQuizData(responseMessage: string) {
-//   const questions = responseMessage.split(/\n{2,}/);
-
-//   const quizData = questions.map((questionBlock, index) => {
-//     const lines = questionBlock
-//       .split("\n")
-//       .filter((line) => line.trim() !== "");
-//     const questionText = lines[0].replace(/^Q\d*[:.]?\s*/, "").trim();
-//     const options = lines
-//       .slice(1, 5)
-//       .map((option) => option.replace(/^[A-D][:.\)]?\s*/, "").trim());
-
-//     return {
-//       questionNumber: index + 1,
-//       question: questionText,
-//       options: options,
-//       points: 0.5,
-//     };
-//   });
-
-//   return quizData;
-// }
