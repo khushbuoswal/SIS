@@ -37,7 +37,8 @@ export default function Quiz() {
   // Timer logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (isExamMode && isTimerRunning && seconds > 0) { // Only run timer in Exam Mode
+    if (isExamMode && isTimerRunning && seconds > 0) {
+      // Only run timer in Exam Mode
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
@@ -67,7 +68,9 @@ export default function Quiz() {
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
     const remainingSeconds = totalSeconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    return `${String(minutes).padStart(2, "0")}:${String(
+      remainingSeconds
+    ).padStart(2, "0")}`;
   };
 
   // Handle quiz submission
@@ -119,7 +122,9 @@ export default function Quiz() {
               <h1 className="text-lg font-semibold md:text-2xl">Quiz Mode</h1>
               {/* Timer visible only if Exam Mode is enabled */}
               {isExamMode && (
-                <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
+                <p className="text-lg font-semibold">
+                  Timer: {formatTime(seconds)}
+                </p>
               )}
             </div>
 
@@ -130,12 +135,18 @@ export default function Quiz() {
                     <p>Loading quiz questions...</p>
                   ) : quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
+                      // <QuizCard
+                      //   key={index}
+                      //   questionNumber={quiz.questionNumber}
+                      //   question={quiz.question}
+                      //   options={quiz.options}
+                      //   points={quiz.points}
+                      // />
                       <QuizCard
                         key={index}
-                        questionNumber={quiz.questionNumber}
-                        question={quiz.question}
+                        questionNumber={quiz.question_number}
+                        question={quiz.quiz_question}
                         options={quiz.options}
-                        points={quiz.points}
                       />
                     ))
                   ) : (
@@ -143,7 +154,9 @@ export default function Quiz() {
                   )}
                   <div className="flex justify-center mt-6">
                     <a href="http://localhost:3000/results">
-                      <Button className="mb-3 w-60" onClick={handleSubmit}>Submit Quiz</Button>
+                      <Button className="mb-3 w-60" onClick={handleSubmit}>
+                        Submit Quiz
+                      </Button>
                     </a>
                   </div>
                 </div>
