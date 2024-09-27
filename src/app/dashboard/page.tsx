@@ -8,6 +8,7 @@ import { Switch } from "@/components/ui/switch"
 import { UserDropdown } from "@/components/ui/userDropdown";
 import * as pdfjsLib from 'pdfjs-dist';
 import { TextItem } from "pdfjs-dist/types/src/display/api";
+import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
@@ -140,7 +141,7 @@ export default function Dashboard() {
                   disabled={!fileSelected || loading}
                   onClick={handleGenerateQuiz}
                 >
-                  {loading ? "Loading..." : "Generate Quiz"}
+                  {loading ? <ButtonLoadingQuiz />: "Generate Quiz"}
                 </Button>
 
                 {quizQuestions && (
