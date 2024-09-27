@@ -2,19 +2,33 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 
+// interface QuizCardProps {
+//   questionNumber: number;
+//   question: string;
+//   options: string[];
+//   points: number;
+// }
+
 interface QuizCardProps {
   questionNumber: number;
   question: string;
   options: string[];
-  points: number;
 }
+
+// export default function QuizCard({
+//   questionNumber,
+//   question,
+//   options,
+//   points,
+// }: QuizCardProps) {
 
 export default function QuizCard({
   questionNumber,
   question,
   options,
-  points,
 }: QuizCardProps) {
+  const points = 0.5; // Default points for each question
+
   return (
     <Card className="mb-10 mx-auto max-w-lg ">
       <CardHeader className="flex justify-between bg-secondary p-4 rounded-sm">
