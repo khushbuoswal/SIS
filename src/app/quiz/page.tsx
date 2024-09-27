@@ -135,13 +135,6 @@ export default function Quiz() {
                     <p>Loading quiz questions...</p>
                   ) : quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
-                      // <QuizCard
-                      //   key={index}
-                      //   questionNumber={quiz.questionNumber}
-                      //   question={quiz.question}
-                      //   options={quiz.options}
-                      //   points={quiz.points}
-                      // />
                       <QuizCard
                         key={index}
                         questionNumber={quiz.question_number}
