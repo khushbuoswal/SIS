@@ -23,7 +23,7 @@ export function ButtonLoadingQuiz() {
   return (
     <Button disabled>
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-      Generating...
+      Generating quiz
     </Button>
   );
 }
