@@ -28,6 +28,7 @@ export function ButtonGeneratingQuiz() {
   );
 }
 
+// add new component for loading quiz
 export function ButtonLoadingQuiz() {
   return (
     <Button disabled>
