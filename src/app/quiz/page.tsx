@@ -147,13 +147,6 @@ export default function Quiz() {
                   ) : (
                     <p></p>
                   )}
-                  {/* <div className="flex justify-center mt-6">
-                    <a href="http://localhost:3000/results">
-                      <Button className="mb-3 w-60" onClick={handleSubmit}>
-                        Submit Quiz
-                      </Button>
-                    </a>
-                  </div> */}
                   <div className="flex justify-center mt-6">
                     {loading ? (
                       <ButtonLoadingQuiz /> // Use the loading button when quiz is loading
