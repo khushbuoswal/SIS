@@ -19,11 +19,20 @@ export function ButtonLoadingDashboard() {
   );
 }
 
-export function ButtonLoadingQuiz() {
+export function ButtonGeneratingQuiz() {
   return (
     <Button disabled>
       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
       Generating quiz
+    </Button>
+  );
+}
+
+export function ButtonLoadingQuiz() {
+  return (
+    <Button disabled>
+      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+      Loading quiz
     </Button>
   );
 }
