@@ -16,10 +16,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
   const [isExamMode, setIsExamMode] = useState(false); // Exam mode state
@@ -59,6 +60,7 @@ export default function Quiz() {
     } else {
       console.error("No quiz questions found in local storage");
     }
+    setLoading(false);
     // Start the timer if Exam Mode is enabled
     if (isExamMode) {
       setIsTimerRunning(true);
@@ -83,6 +85,8 @@ export default function Quiz() {
     setIsDialogOpen(false);
     router.push("/results"); // Redirect to the results page after closing the dialog
   };
+
+  
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
@@ -131,9 +135,7 @@ export default function Quiz() {
             <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
               <ScrollArea className="h-full w-full">
                 <div className="p-4 lg:p-6 mt-5">
-                  {loading ? (
-                    <p>Loading quiz questions...</p>
-                  ) : quizData.length > 0 ? (
+                  {quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
                       <QuizCard
                         key={index}
@@ -145,12 +147,23 @@ export default function Quiz() {
                   ) : (
                     <p></p>
                   )}
-                  <div className="flex justify-center mt-6">
+                  {/* <div className="flex justify-center mt-6">
                     <a href="http://localhost:3000/results">
                       <Button className="mb-3 w-60" onClick={handleSubmit}>
                         Submit Quiz
                       </Button>
                     </a>
+                  </div> */}
+                  <div className="flex justify-center mt-6">
+                    {loading ? (
+                      <ButtonLoadingQuiz /> // Use the loading button when quiz is loading
+                    ) : (
+                      <a href="http://localhost:3000/results">
+                        <Button className="mb-3 w-60" onClick={handleSubmit}>
+                          Submit Quiz
+                        </Button>
+                      </a>
+                    )}
                   </div>
                 </div>
               </ScrollArea>

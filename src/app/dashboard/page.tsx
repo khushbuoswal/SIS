@@ -8,7 +8,7 @@ import { Switch } from "@/components/ui/switch"
 import { UserDropdown } from "@/components/ui/userDropdown";
 import * as pdfjsLib from 'pdfjs-dist';
 import { TextItem } from "pdfjs-dist/types/src/display/api";
-import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
+import { ButtonGeneratingQuiz } from "@/components/ui/button-loading";
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.min.mjs';
 
@@ -84,6 +84,7 @@ export default function Dashboard() {
 
   const handleGenerateQuiz = async () => {
     await fetchQuizQuestions();
+    setLoading(true); // This is required to avoid UI flash lag
     window.location.href = "/quiz";
   };
 
@@ -141,7 +142,7 @@ export default function Dashboard() {
                   disabled={!fileSelected || loading}
                   onClick={handleGenerateQuiz}
                 >
-                  {loading ? <ButtonLoadingQuiz />: "Generate Quiz"}
+                  {loading ? <ButtonGeneratingQuiz />: "Generate Quiz"}
                 </Button>
               </div>
             </div>
