@@ -24,7 +24,7 @@ export default function Home() {
   const handleLogin = async () => {
     setLoading(true);
     setTimeout(() => {
-      // Redirect to /quiz after 3 seconds
+      // Redirect to /dashboard after 3 seconds
       window.location.href = "/dashboard";
     }, 1000);
   };
