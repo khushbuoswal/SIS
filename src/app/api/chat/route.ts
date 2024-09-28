@@ -38,9 +38,8 @@ export async function POST(request: NextRequest) {
     const responseMessage = completion.choices[0].message?.content;
 
     if (responseMessage) {
-      const parsedQuizData = JSON.parse(responseMessage);
-      console.log(parsedQuizData);
-      return NextResponse.json({ quizData: parsedQuizData });
+      console.log(JSON.parse(responseMessage));
+      return NextResponse.json({ quizData: JSON.parse(responseMessage) });
     } else {
       return NextResponse.json(
         { error: "No quiz data received from OpenAI." },
