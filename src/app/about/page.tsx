@@ -1,6 +1,6 @@
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
-import { Info, Globe, Target, Mail, Eye } from "lucide-react";
+import { Info, Globe, Target, Mail, Eye, PenTool } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
 export default function About() {
@@ -22,7 +22,7 @@ export default function About() {
                             {/* About Us Card */}
                             <Card className="w-full max-w-md p-4">
                                 <CardHeader className="flex items-center space-x-4">
-                                    <Globe className="h-8 w-8 text-primary mb-2" />
+                                    <PenTool className="h-8 w-8 text-primary mb-2" />
                                     <CardTitle className="text-xl">About Us</CardTitle>
                                 </CardHeader>
                                 <CardContent>
