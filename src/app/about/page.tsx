@@ -15,7 +15,6 @@ export default function About() {
           </header>
 
           <main className="flex flex-1 flex-col gap-6 p-6 lg:gap-8 lg:p-8 items-center">
-            {/* 2x2 grid of cards */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl w-full mt-5">
               {/* About Us Card */}
               <Card className="w-full max-w-md p-4">
