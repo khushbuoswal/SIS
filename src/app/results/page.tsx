@@ -14,6 +14,7 @@ export default function Quiz() {
   const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0); // Add score state
   const [time, setTime] = useState("00:00"); // Add time state
+  const [userAnswers, setUserAnswers] = useState({});
 
   
   useEffect(() => {
@@ -29,6 +30,7 @@ export default function Quiz() {
     if(submittedAnswers) {
       console.log("submitted answers are...");
       console.log(submittedAnswers);
+      setUserAnswers(submittedAnswers);
     } else {
       console.error("No submitted answers found in local storage");
     }
