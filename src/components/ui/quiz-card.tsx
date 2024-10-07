@@ -14,17 +14,17 @@ export default function QuizCard({
   questionNumber,
   question,
   options,
-  points,
+  // points,
   handleAnswerSelection
 }: QuizCardProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null); 
 
   const handleOptionChange = (option: string) => {
     setSelectedOption(option); 
-    console.log("hello from " + questionNumber)
-    console.log(option)
     handleAnswerSelection(questionNumber, option)
   };
+
+  const points = 0.5; // Default points for each question
 
   return (
     <Card className="mb-10 mx-auto max-w-lg">

@@ -17,10 +17,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 //import { getUserAnswers, handleAnswerSelectionExternal } from "./quizStore";
+import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
   const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
@@ -48,7 +49,8 @@ export default function Quiz() {
   // Timer logic
   useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (isExamMode && isTimerRunning && seconds > 0) { // Only run timer in Exam Mode
+    if (isExamMode && isTimerRunning && seconds > 0) {
+      // Only run timer in Exam Mode
       timer = setInterval(() => {
         setSeconds((prevSeconds) => prevSeconds - 1);
       }, 1000);
@@ -69,6 +71,7 @@ export default function Quiz() {
     } else {
       console.error("No quiz questions found in local storage");
     }
+    setLoading(false);
     // Start the timer if Exam Mode is enabled
     if (isExamMode) {
       setIsTimerRunning(true);
@@ -78,7 +81,9 @@ export default function Quiz() {
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
     const remainingSeconds = totalSeconds % 60;
-    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+    return `${String(minutes).padStart(2, "0")}:${String(
+      remainingSeconds
+    ).padStart(2, "0")}`;
   };
 
   // Handle quiz submission
@@ -94,6 +99,8 @@ export default function Quiz() {
     setIsDialogOpen(false);
     router.push("/results"); // Redirect to the results page after closing the dialog
   };
+
+  
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
@@ -133,21 +140,21 @@ export default function Quiz() {
               <h1 className="text-lg font-semibold md:text-2xl">Quiz Mode</h1>
               {/* Timer visible only if Exam Mode is enabled */}
               {isExamMode && (
-                <p className="text-lg font-semibold">Timer: {formatTime(seconds)}</p>
+                <p className="text-lg font-semibold">
+                  Timer: {formatTime(seconds)}
+                </p>
               )}
             </div>
 
             <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
               <ScrollArea className="h-full w-full">
                 <div className="p-4 lg:p-6 mt-5">
-                  {loading ? (
-                    <p>Loading quiz questions...</p>
-                  ) : quizData.length > 0 ? (
+                  {quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
                       <QuizCard
                         key={index}
-                        questionNumber={quiz.questionNumber}
-                        question={quiz.question}
+                        questionNumber={quiz.question_number}
+                        question={quiz.quiz_question}
                         options={quiz.options}
                         points={quiz.points}
                         handleAnswerSelection={handleAnswerSelection}
@@ -157,10 +164,15 @@ export default function Quiz() {
                     <p></p>
                   )}
                   <div className="flex justify-center mt-6">
-                    <a href="http://localhost:3000/results">
-                      <Button className="mb-3 w-60" onClick={handleSubmit} >Submit Quiz</Button>
-                    </a>
-
+                    {loading ? (
+                      <ButtonLoadingQuiz /> // Use the loading button when quiz is loading
+                    ) : (
+                      <a href="http://localhost:3000/results">
+                        <Button className="mb-3 w-60" onClick={handleSubmit}>
+                          Submit Quiz
+                        </Button>
+                      </a>
+                    )}
                   </div>
                 </div>
               </ScrollArea>
