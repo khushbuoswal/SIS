@@ -8,6 +8,7 @@ import QuizCard from "@/components/ui/quiz-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
+import QuizCardResult from "@/components/ui/quiz-card-result";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
@@ -95,7 +96,7 @@ export default function Quiz() {
                     <p>Loading quiz questions...</p>
                   ) : quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
-                      <QuizCard
+                      <QuizCardResult
                         key={index}
                         questionNumber={quiz.questionNumber}
                         question={quiz.question}
