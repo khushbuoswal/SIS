@@ -86,18 +86,14 @@ export default function Quiz() {
     ).padStart(2, "0")}`;
   };
 
+  // Handle quiz submission
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
-    
-    const timeTaken = 600 - seconds; // Calculate the time taken (600 seconds is the total initial time)
-    localStorage.setItem("timeTaken", JSON.stringify(timeTaken)); // Save the time taken
-    
-    // Save user answers to local storage
+    console.log(userAnswers)
+    // Save to local storage
     localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
-    
     console.log("Quiz submitted");
   };
-
   const handleDialogClose = () => {
     setIsDialogOpen(false);
     router.push("/results"); // Redirect to the results page after closing the dialog
