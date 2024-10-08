@@ -27,6 +27,14 @@ export default function Quiz() {
       console.error("No quiz questions found in local storage");
     }
 
+    // In the results component or page
+  useEffect(() => {
+    const timeTaken = localStorage.getItem("elapsedTime");
+    if (timeTaken) {
+      console.log(`Time taken: ${timeTaken} seconds`);
+    }
+  }, []);
+
     const submittedAnswers = localStorage.getItem("userAnswers");
     if(submittedAnswers) {
       console.log("submitted answers are...");

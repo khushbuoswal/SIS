@@ -28,7 +28,13 @@ export default function Quiz() {
   const [isExamMode, setIsExamMode] = useState(false); // Exam mode state
   const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog open state
   const router = useRouter(); // Initialize useRouter
-
+  const handleDialogClose = () => {
+    setIsDialogOpen(false);
+    router.push("/results"); // Redirect to the results page after closing the dialog
+  };
+  const [startTime, setStartTime] = useState<number | null>(null);
+  const [elapsedTime, setElapsedTime] = useState<number | null>(null);
+  
 
   const handleAnswerSelection = (questionNumber: number, selection: string) => {
     setUserAnswers((prevAnswers: any) => ({
@@ -36,6 +42,23 @@ export default function Quiz() {
       [questionNumber]: selection,
     }));
   };
+
+
+
+// Set the start time when the exam mode and timer start
+useEffect(() => {
+  if (isExamMode && isTimerRunning && startTime === null) {
+    setStartTime(Date.now());
+  }
+}, [isExamMode, isTimerRunning, startTime]);
+
+
+// Set the start time when the exam mode and timer start
+useEffect(() => {
+  if (isExamMode && isTimerRunning && startTime === null) {
+    setStartTime(Date.now());
+  }
+}, [isExamMode, isTimerRunning]);
 
 
   // Check Exam Mode from localStorage on component mount
@@ -89,19 +112,17 @@ export default function Quiz() {
   // Handle quiz submission
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
-    console.log(userAnswers)
-    // Save to local storage
+    if (startTime) {
+      const timeTaken = Math.floor((Date.now() - startTime) / 1000); // Calculate in seconds
+      setElapsedTime(timeTaken);
+      localStorage.setItem("elapsedTime", timeTaken.toString()); // Save to localStorage if needed
+    }
+    console.log(userAnswers);
     localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
     console.log("Quiz submitted");
+    router.push("/results"); // Redirect to results page
   };
-
-  const handleDialogClose = () => {
-    setIsDialogOpen(false);
-    router.push("/results"); // Redirect to the results page after closing the dialog
-  };
-
   
-
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-2 right-4">
