@@ -8,12 +8,14 @@ import QuizCard from "@/components/ui/quiz-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
+import QuizCardResult from "@/components/ui/quiz-card-result";
 
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0); // Add score state
   const [time, setTime] = useState("00:00"); // Add time state
+  const [userAnswers, setUserAnswers] = useState({});
 
   
   useEffect(() => {
@@ -23,6 +25,15 @@ export default function Quiz() {
       setQuizData(JSON.parse(storedQuizQuestions));
     } else {
       console.error("No quiz questions found in local storage");
+    }
+
+    const submittedAnswers = localStorage.getItem("userAnswers");
+    if(submittedAnswers) {
+      console.log("submitted answers are...");
+      console.log(submittedAnswers);
+      setUserAnswers(submittedAnswers);
+    } else {
+      console.error("No submitted answers found in local storage");
     }
 
     // Placeholder: Set score and time
@@ -73,6 +84,7 @@ export default function Quiz() {
                 <p className="text-sm md:text-lg">Time: {time}</p>
               </div>
             </div>
+            
 
 
             <div
@@ -84,7 +96,7 @@ export default function Quiz() {
                     <p>Loading quiz questions...</p>
                   ) : quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
-                      <QuizCard
+                      <QuizCardResult
                         key={index}
                         questionNumber={quiz.questionNumber}
                         question={quiz.question}
