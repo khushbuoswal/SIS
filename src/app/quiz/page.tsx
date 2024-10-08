@@ -16,10 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-<<<<<<< HEAD
-=======
 //import { getUserAnswers, handleAnswerSelectionExternal } from "./quizStore";
->>>>>>> 8811f35b216d9d1f32b9fca24e490869b73a9cd8
 import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
 
 export default function Quiz() {
@@ -159,11 +156,8 @@ export default function Quiz() {
                         questionNumber={quiz.question_number}
                         question={quiz.quiz_question}
                         options={quiz.options}
-<<<<<<< HEAD
-=======
                         points={quiz.points}
                         handleAnswerSelection={handleAnswerSelection}
->>>>>>> 8811f35b216d9d1f32b9fca24e490869b73a9cd8
                       />
                     ))
                   ) : (
