@@ -1,28 +1,19 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-<<<<<<< HEAD
-=======
 import { useState } from "react";
->>>>>>> 8811f35b216d9d1f32b9fca24e490869b73a9cd8
 
 interface QuizCardProps {
   questionNumber: number;
   question: string;
   options: string[];
-<<<<<<< HEAD
-=======
   points: number;
   handleAnswerSelection:Function
->>>>>>> 8811f35b216d9d1f32b9fca24e490869b73a9cd8
 }
 
 export default function QuizCard({
   questionNumber,
   question,
   options,
-<<<<<<< HEAD
-}: QuizCardProps) {
-=======
   // points,
   handleAnswerSelection
 }: QuizCardProps) {
@@ -33,7 +24,6 @@ export default function QuizCard({
     handleAnswerSelection(questionNumber, option)
   };
 
->>>>>>> 8811f35b216d9d1f32b9fca24e490869b73a9cd8
   const points = 0.5; // Default points for each question
 
   return (
