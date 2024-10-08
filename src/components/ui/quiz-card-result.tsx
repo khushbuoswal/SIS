@@ -22,7 +22,7 @@ export default function QuizCardResult({
   return (
     <Card className="mb-10 mx-auto max-w-lg">
       <CardHeader className="flex justify-between bg-secondary p-4 rounded-sm">
-        <CardTitle className="text-xl">Questionnnnnn {questionNumber}</CardTitle>
+        <CardTitle className="text-xl">Question {questionNumber}</CardTitle>
         <div className="font-semibold">{points} Points</div>
       </CardHeader>
       <CardContent className="p-4">
