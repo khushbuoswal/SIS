@@ -98,8 +98,8 @@ export default function Quiz() {
                     quizData.map((quiz, index) => (
                       <QuizCardResult
                         key={index}
-                        questionNumber={quiz.questionNumber}
-                        question={quiz.question}
+                        questionNumber={quiz.question_number}
+                        question={quiz.quiz_question}
                         options={quiz.options}
                         points={quiz.points}
                       />
