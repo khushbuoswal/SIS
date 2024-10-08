@@ -6,6 +6,7 @@ interface QuizCardResultProps {
   questionNumber: number;
   question: string;
   options: string[];
+  correctOption: string; // Add the correct answer prop
   points: number;
 }
 
@@ -13,9 +14,9 @@ export default function QuizCardResult({
   questionNumber,
   question,
   options,
+  correctOption, // Use the correct answer prop
 }: QuizCardResultProps) {
   const [selectedOption, setSelectedOption] = useState<string | null>(null); 
-
 
   const points = 0.5; // Default points for each question
 
@@ -29,13 +30,10 @@ export default function QuizCardResult({
         <div className="mb-4">{question}</div>
         {options.map((option, index) => (
           <div key={index} className="mb-2">
-            <ul className="flex items-center gap-2 hover:text-primary">
-              
+            <ul className="flex items-center gap-2">
               <li
-                // type="radio"
-                //name={`question-${questionNumber}`}
-                value={option}
-              //  checked={selectedOption === option} 
+                className={`p-2 rounded-md ${option === correctOption ? 'bg-green-300 font-bold' : ''}`}
+                // Highlight the correct option with a green background
               />
               <span>{option}</span>
             </ul>
