@@ -30,6 +30,8 @@ export default function Quiz() {
     const submittedAnswers = localStorage.getItem("userAnswers");
     if (submittedAnswers) {
       setUserAnswers(JSON.parse(submittedAnswers));
+      console.log(submittedAnswers);
+      setUserAnswers(submittedAnswers);
     } else {
       console.error("No submitted answers found in local storage");
     }
