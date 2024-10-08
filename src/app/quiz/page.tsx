@@ -16,6 +16,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+//import { getUserAnswers, handleAnswerSelectionExternal } from "./quizStore";
 import { ButtonLoadingQuiz } from "@/components/ui/button-loading";
 
 export default function Quiz() {
@@ -23,9 +24,19 @@ export default function Quiz() {
   const [loading, setLoading] = useState(true);
   const [seconds, setSeconds] = useState(600); // 10 minutes in seconds
   const [isTimerRunning, setIsTimerRunning] = useState(true); // Timer state
+  const [userAnswers, setUserAnswers] = useState<any>({}); // Track user selections
   const [isExamMode, setIsExamMode] = useState(false); // Exam mode state
   const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog open state
   const router = useRouter(); // Initialize useRouter
+
+
+  const handleAnswerSelection = (questionNumber: number, selection: string) => {
+    setUserAnswers((prevAnswers: any) => ({
+      ...prevAnswers,
+      [questionNumber]: selection,
+    }));
+  };
+
 
   // Check Exam Mode from localStorage on component mount
   useEffect(() => {
@@ -78,6 +89,9 @@ export default function Quiz() {
   // Handle quiz submission
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
+    console.log(userAnswers)
+    // Save to local storage
+    localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
     console.log("Quiz submitted");
   };
 
@@ -142,6 +156,8 @@ export default function Quiz() {
                         questionNumber={quiz.question_number}
                         question={quiz.quiz_question}
                         options={quiz.options}
+                        points={quiz.points}
+                        handleAnswerSelection={handleAnswerSelection}
                       />
                     ))
                   ) : (
