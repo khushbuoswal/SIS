@@ -86,12 +86,15 @@ export default function Quiz() {
     ).padStart(2, "0")}`;
   };
 
-  // Handle quiz submission
   const handleSubmit = () => {
     setIsTimerRunning(false); // Stop the timer when the quiz is submitted
-    console.log(userAnswers)
-    // Save to local storage
+    
+    const timeTaken = 600 - seconds; // Calculate the time taken (600 seconds is the total initial time)
+    localStorage.setItem("timeTaken", JSON.stringify(timeTaken)); // Save the time taken
+    
+    // Save user answers to local storage
     localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+    
     console.log("Quiz submitted");
   };
 
