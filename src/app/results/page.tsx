@@ -105,11 +105,12 @@ export default function Quiz() {
                   ) : quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
                       <QuizCardResult
-                        key={index}
-                        questionNumber={quiz.question_number}
-                        question={quiz.quiz_question}
-                        options={quiz.options}
-                        points={quiz.points}
+                      key={index}
+                      questionNumber={quiz.question_number}
+                      question={quiz.quiz_question}
+                      options={quiz.options}
+                      correctOption={quiz.correct_option} // Pass the correct option
+                      points={quiz.points}
                       />
                     ))
                   ) : (
