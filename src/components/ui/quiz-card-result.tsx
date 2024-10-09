@@ -24,6 +24,9 @@ export default function QuizCardResult({
   selectedAnswer,
   setScore,
 }: QuizCardResultProps) {
+  const [selectedOption, setSelectedOption] = useState<string | null>(null); 
+
+
   const points = 0.5; // Default points for each question
   const [totalScore, setTotalScore] = useState(0)
   
@@ -53,7 +56,6 @@ export default function QuizCardResult({
         {options.map((option, index) => (
           <div key={index} className="mb-2">
             <ul className={` ${selectedAnswer == option ? "border-4 rounded-md" : ""} flex items-center gap-2 `}>
-            className={`myClass ${index ? "active" : ""}`} 
               <li
                 value={option}
               />

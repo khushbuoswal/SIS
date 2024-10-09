@@ -26,7 +26,7 @@ export default function Quiz() {
     } else {
       console.error("No quiz questions found in local storage");
     }
-
+  
     const submittedAnswers = localStorage.getItem("userAnswers");
     if(submittedAnswers) {
       console.log(submittedAnswers)
@@ -34,11 +34,19 @@ export default function Quiz() {
     } else {
       console.error("No submitted answers found in local storage");
     }
-
-    // Placeholder: Set score and time
-    // setScore(85); // Example score, adjust based on actual logic
-    setTime("12:34"); // Example time, adjust based on actual logic
-
+  
+    // Load the time taken
+    const storedTimeTaken = localStorage.getItem("timeTaken");
+    if (storedTimeTaken) {
+      const timeTakenSeconds = JSON.parse(storedTimeTaken);
+      const minutes = Math.floor(timeTakenSeconds / 60);
+      const seconds = timeTakenSeconds % 60;
+      setTime(`${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`);
+    }
+  
+    // Placeholder: Set score (you can replace this logic with actual scoring logic)
+    //setScore(85); // Example score
+  
   }, []);
 
   return (
@@ -96,15 +104,15 @@ export default function Quiz() {
                   ) : quizData.length > 0 ? (
                     quizData.map((quiz, index) => (
                       <QuizCardResult
-                        key={index}
-                        questionNumber={quiz.questionNumber}
-                        question={quiz.question}
-                        options={quiz.options}
-                        points={quiz.points}
-                        correctOption={quiz.correct_option}
-                        reference={quiz.reference}
-                        selectedAnswer={userAnswers[index+1]}
-                        setScore={setScore}
+                      key={index}
+                      questionNumber={quiz.question_number}
+                      question={quiz.quiz_question}
+                      options={quiz.options}
+                      correctOption={quiz.correct_option} // Pass the correct option
+                      points={quiz.points}
+                      reference={quiz.reference}
+                      selectedAnswer={userAnswers[index+1]}
+                      setScore={setScore}
                       />
                     ))
                   ) : (
