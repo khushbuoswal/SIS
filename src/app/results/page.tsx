@@ -15,7 +15,7 @@ export default function Quiz() {
   const [loading, setLoading] = useState(false);
   const [score, setScore] = useState(0); // Add score state
   const [time, setTime] = useState("00:00"); // Add time state
-  const [userAnswers, setUserAnswers] = useState({});
+  const [userAnswers, setUserAnswers] = useState<any[]>([]);
 
   
   useEffect(() => {
@@ -29,15 +29,14 @@ export default function Quiz() {
 
     const submittedAnswers = localStorage.getItem("userAnswers");
     if(submittedAnswers) {
-      console.log("submitted answers are...");
-      console.log(submittedAnswers);
-      setUserAnswers(submittedAnswers);
+      console.log(submittedAnswers)
+      setUserAnswers(JSON.parse(submittedAnswers));
     } else {
       console.error("No submitted answers found in local storage");
     }
 
     // Placeholder: Set score and time
-    setScore(85); // Example score, adjust based on actual logic
+    // setScore(85); // Example score, adjust based on actual logic
     setTime("12:34"); // Example time, adjust based on actual logic
 
   }, []);
@@ -102,6 +101,10 @@ export default function Quiz() {
                         question={quiz.question}
                         options={quiz.options}
                         points={quiz.points}
+                        correctOption={quiz.correct_option}
+                        reference={quiz.reference}
+                        selectedAnswer={userAnswers[index+1]}
+                        setScore={setScore}
                       />
                     ))
                   ) : (
