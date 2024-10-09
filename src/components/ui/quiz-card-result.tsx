@@ -24,23 +24,19 @@ export default function QuizCardResult({
   selectedAnswer,
   setScore,
 }: QuizCardResultProps) {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null); 
 
+  const points = 0.5; // Default points for each question  
 
-  const points = 0.5; // Default points for each question
-  const [totalScore, setTotalScore] = useState(0)
-  
-
-  useEffect(() => {
-    let totalScore = 0
+  const scoreQuiz = () => {
+    let totalScore = 0.0
     options.forEach((option) => {
       if(selectedAnswer == correctOption){
+        console.log(selectedAnswer + " = " + correctOption)
         totalScore = totalScore + points
       }
     })
     setScore(totalScore)
-    
-  }, []);
+  }
 
   return (
     <Card className="mb-10 mx-auto max-w-lg"> 

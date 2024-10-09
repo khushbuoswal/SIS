@@ -13,7 +13,7 @@ import QuizCardResult from "@/components/ui/quiz-card-result";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [score, setScore] = useState(0); // Add score state
+  const [score, setScore] = useState(0.0); // Add score state
   const [time, setTime] = useState("00:00"); // Add time state
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
 
@@ -29,7 +29,6 @@ export default function Quiz() {
   
     const submittedAnswers = localStorage.getItem("userAnswers");
     if(submittedAnswers) {
-      console.log(submittedAnswers)
       setUserAnswers(JSON.parse(submittedAnswers));
     } else {
       console.error("No submitted answers found in local storage");
