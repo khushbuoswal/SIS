@@ -2,7 +2,7 @@
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
@@ -16,6 +16,7 @@ export default function Quiz() {
   const [time, setTime] = useState("00:00");
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
   const maxScore = 2.5;
+  const points = 0.5;
 
   
   useEffect(() => {
@@ -41,22 +42,13 @@ export default function Quiz() {
       const seconds = timeTakenSeconds % 60;
       setTime(`${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`);
     }
+  }, []);
   
     // Placeholder: Set score (you can replace this logic with actual scoring logic)
     //setScore(85); // Example score
-    let correctAnswersCount = 0;
-    quizData.forEach((quiz, index) => {
-      if (userAnswers[index] === quiz.correct_option) {
-        correctAnswersCount++;
-      }
-    });
-
-    // Each correct answer gives 0.5 points
-    setScore(correctAnswersCount * 0.5);
-  }, []);
-
-  const scorePercentage = ((score / maxScore) * 100).toFixed(2);
-
+    const handleCorrectAnswer = useCallback(() => {
+      setScore((prevScore) => prevScore + points); // Adjust points based on your scoring logic
+  }, [points]);
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-2 right-4">
@@ -96,7 +88,7 @@ export default function Quiz() {
               {/* Score and Time Section */}
               <div className="mt-2 flex justify-between">
               <p className="text-sm md:text-lg">Score: {score.toFixed(2)} / 2.5</p>
-              <p className="text-sm md:text-lg">Percentage: {scorePercentage}%</p>
+              <p className="text-sm md:text-lg">Percentage: {((score / maxScore) * 100).toFixed(2)}%</p>
                 <p className="text-sm md:text-lg">Time: {time}</p>
               </div>
             </div>
@@ -118,10 +110,9 @@ export default function Quiz() {
                       question={quiz.quiz_question}
                       options={quiz.options}
                       correctOption={quiz.correct_option} // Pass the correct option
-                      points={quiz.points}
                       reference={quiz.reference}
                       selectedAnswer={userAnswers[index+1]}
-                      setScore={setScore}
+                      handleCorrectAnswer={handleCorrectAnswer}
                       />
                     ))
                   ) : (
