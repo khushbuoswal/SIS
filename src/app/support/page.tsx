@@ -2,6 +2,7 @@ import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
 import { Target, Mail, Eye, PenTool } from "lucide-react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+//Support page for users to conact the support team 
 
 export default function Support() {
   return (
