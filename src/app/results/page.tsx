@@ -15,6 +15,7 @@ export default function Quiz() {
   const [score, setScore] = useState(0.0);
   const [time, setTime] = useState("00:00");
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
+  const maxScore = 2.5;
 
   
   useEffect(() => {

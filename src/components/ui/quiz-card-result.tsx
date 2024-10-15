@@ -25,18 +25,24 @@ export default function QuizCardResult({
   setScore,
 }: QuizCardResultProps) {
 
-  const points = 0.5; // Default points for each question  
+  const points = 0.5; // Default points for each correct answer  
 
-  const scoreQuiz = () => {
-    let totalScore = 0.0
-    options.forEach((option) => {
-      if(selectedAnswer == correctOption){
-        console.log(selectedAnswer + " = " + correctOption)
-        totalScore = totalScore + points
-      }
-    })
-    setScore(totalScore)
-  }
+  useEffect(() => {
+    if (selectedAnswer === correctOption) {
+      setScore((prevScore: number) => prevScore + points); // Only add score if correct
+    }
+  }, [selectedAnswer, correctOption, points, setScore]);
+
+  // const scoreQuiz = () => {
+  //   let totalScore = 0.0
+  //   options.forEach((option) => {
+  //     if(selectedAnswer == correctOption){
+  //       console.log(selectedAnswer + " = " + correctOption)
+  //       totalScore = totalScore + points
+  //     }
+  //   })
+  //   setScore(totalScore)
+  // }
 
   return (
     <Card className="mb-10 mx-auto max-w-lg"> 
