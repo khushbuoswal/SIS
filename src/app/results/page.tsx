@@ -47,6 +47,8 @@ export default function Quiz() {
   
   }, []);
 
+  const scorePercentage = ((score / maxScore) * 100).toFixed(2);
+
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-2 right-4">
@@ -85,7 +87,8 @@ export default function Quiz() {
               <h1 className="text-lg font-semibold md:text-2xl">Results Page</h1>
               {/* Score and Time Section */}
               <div className="mt-2 flex justify-between">
-                <p className="text-sm md:text-lg">Score: {score}</p>
+              <p className="text-sm md:text-lg">Score: {score.toFixed(2)} / 2.5</p>
+              <p className="text-sm md:text-lg">Percentage: {scorePercentage}%</p>
                 <p className="text-sm md:text-lg">Time: {time}</p>
               </div>
             </div>

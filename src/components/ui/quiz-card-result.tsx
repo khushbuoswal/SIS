@@ -11,7 +11,7 @@ interface QuizCardResultProps {
   correctOption: string
   reference: string;
   selectedAnswer: string;
-  setScore: Function;
+  setScore: (score: (prevScore: number) => number) => void;
 }
 
 
