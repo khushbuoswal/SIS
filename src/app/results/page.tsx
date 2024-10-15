@@ -13,13 +13,12 @@ import QuizCardResult from "@/components/ui/quiz-card-result";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [score, setScore] = useState(0.0); // Add score state
-  const [time, setTime] = useState("00:00"); // Add time state
+  const [score, setScore] = useState(0.0);
+  const [time, setTime] = useState("00:00");
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
 
   
   useEffect(() => {
-    // Load quiz data from localStorage
     const storedQuizQuestions = localStorage.getItem("quizQuestions");
     if (storedQuizQuestions) {
       setQuizData(JSON.parse(storedQuizQuestions));
