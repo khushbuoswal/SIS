@@ -20,7 +20,7 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <PenTool className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">About Us</CardTitle>
+                  <CardTitle className="text-xl">Email</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
@@ -37,7 +37,7 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <Target className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">Our Mission</CardTitle>
+                  <CardTitle className="text-xl">Phone</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
@@ -55,7 +55,7 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <Eye className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">Our Vision</CardTitle>
+                  <CardTitle className="text-xl">Address</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
@@ -73,7 +73,7 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <Mail className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">Get In Touch</CardTitle>
+                  <CardTitle className="text-xl">Social Media</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
