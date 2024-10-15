@@ -44,7 +44,7 @@ export default function Quiz() {
   
     // Placeholder: Set score (you can replace this logic with actual scoring logic)
     //setScore(85); // Example score
-  
+    setScore(0);
   }, []);
 
   const scorePercentage = ((score / maxScore) * 100).toFixed(2);

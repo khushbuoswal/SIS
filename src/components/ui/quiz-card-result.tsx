@@ -33,17 +33,6 @@ export default function QuizCardResult({
     }
   }, [selectedAnswer, correctOption, points, setScore]);
 
-  // const scoreQuiz = () => {
-  //   let totalScore = 0.0
-  //   options.forEach((option) => {
-  //     if(selectedAnswer == correctOption){
-  //       console.log(selectedAnswer + " = " + correctOption)
-  //       totalScore = totalScore + points
-  //     }
-  //   })
-  //   setScore(totalScore)
-  // }
-
   return (
     <Card className="mb-10 mx-auto max-w-lg"> 
       <CardHeader className="flex flex-row justify-between bg-secondary p-4 rounded-sm">
