@@ -20,15 +20,11 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <PenTool className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">About Us</CardTitle>
+                  <CardTitle className="text-xl">Email</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
-                    Welcome to Quizzly AI! Your innovative solution for quiz
-                    creation and learning enhancement. We specialize in
-                    harnessing the power of artificial intelligence to transform
-                    multi-page text documents into interactive quizzes, making
-                    learning and assessment more engaging and efficient.
+                        Email: Quizly@outlook.com 
                   </p>
                 </CardContent>
               </Card>
@@ -37,16 +33,11 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <Target className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">Our Mission</CardTitle>
+                  <CardTitle className="text-xl">Phone</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
-                    At Quizzly AI, our mission is to streamline the process of
-                    quiz creation by leveraging cutting-edge AI technology. We
-                    aim to provide educators, students, and professionals with a
-                    robust tool that simplifies the task of generating quizzes,
-                    allowing users to focus on what truly matters – learning and
-                    knowledge retention.
+                      Phone: 0485396528
                   </p>
                 </CardContent>
               </Card>
@@ -55,16 +46,11 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <Eye className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">Our Vision</CardTitle>
+                  <CardTitle className="text-xl">Address</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
-                    We envision a future where educational tools are seamlessly
-                    integrated into everyday learning experiences. By combining
-                    AI technology with user-friendly interfaces, Quizzly AI
-                    seeks to revolutionize how quizzes are created and used,
-                    making knowledge assessment and acquisition a more dynamic
-                    and interactive process.
+                   123 Harbourview Plaza, Level 10, Sydney, NSW 2000, Australia
                   </p>
                 </CardContent>
               </Card>
@@ -73,7 +59,7 @@ export default function About() {
               <Card className="w-full max-w-md p-4">
                 <CardHeader className="flex items-center space-x-4">
                   <Mail className="h-8 w-8 text-primary mb-2" />
-                  <CardTitle className="text-xl">Get In Touch</CardTitle>
+                  <CardTitle className="text-xl">Social Media</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-sm lg:text-base text-muted-foreground">
