@@ -2,9 +2,8 @@
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import QuizCard from "@/components/ui/quiz-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
@@ -13,13 +12,13 @@ import QuizCardResult from "@/components/ui/quiz-card-result";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [score, setScore] = useState(0.0); // Add score state
-  const [time, setTime] = useState("00:00"); // Add time state
+  const [correctAnswers, setCorrectAnswers] = useState(0); // To track number of correct answers
+  const [time, setTime] = useState("00:00");
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
-
+  const maxScore = 2.5; // Adjust this to match the number of questions multiplied by points
+  const points = 0.5; // Points per correct answer
   
   useEffect(() => {
-    // Load quiz data from localStorage
     const storedQuizQuestions = localStorage.getItem("quizQuestions");
     if (storedQuizQuestions) {
       setQuizData(JSON.parse(storedQuizQuestions));
@@ -42,11 +41,15 @@ export default function Quiz() {
       const seconds = timeTakenSeconds % 60;
       setTime(`${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`);
     }
-  
-    // Placeholder: Set score (you can replace this logic with actual scoring logic)
-    //setScore(85); // Example score
-  
   }, []);
+  
+  // Update the number of correct answers
+  const handleCorrectAnswer = useCallback(() => {
+    setCorrectAnswers((prevCount) => prevCount + 0.5); // Count the correct answers
+  }, []);
+  
+  // Calculate the total score by multiplying correct answers with points
+  const totalScore = correctAnswers * points;
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
@@ -81,17 +84,15 @@ export default function Quiz() {
           </header>
 
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-            {/* Title Section */}
             <div className="w-full">
               <h1 className="text-lg font-semibold md:text-2xl">Results Page</h1>
-              {/* Score and Time Section */}
               <div className="mt-2 flex justify-between">
-                <p className="text-sm md:text-lg">Score: {score}</p>
+              <p className="text-sm md:text-lg">Score: {totalScore.toFixed(2)} / {maxScore}</p>
+              <p className="text-sm md:text-lg">Percentage: {((totalScore / maxScore) * 100).toFixed(2)}%</p>
                 <p className="text-sm md:text-lg">Time: {time}</p>
               </div>
             </div>
             
-
 
             <div
               className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
@@ -107,11 +108,10 @@ export default function Quiz() {
                       questionNumber={quiz.question_number}
                       question={quiz.quiz_question}
                       options={quiz.options}
-                      correctOption={quiz.correct_option} // Pass the correct option
-                      points={quiz.points}
+                      correctOption={quiz.correct_option}
                       reference={quiz.reference}
                       selectedAnswer={userAnswers[index+1]}
-                      setScore={setScore}
+                      handleCorrectAnswer={handleCorrectAnswer} // Callback for correct answer
                       />
                     ))
                   ) : (
