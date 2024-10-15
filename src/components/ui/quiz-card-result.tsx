@@ -10,7 +10,7 @@ interface QuizCardResultProps {
   correctOption: string;
   reference: string;
   selectedAnswer: string;
-  handleCorrectAnswer: () => void; // Make sure this updates the score correctly without causing re-renders
+  handleCorrectAnswer: () => void;
 }
 
 export default function QuizCardResult({
@@ -23,15 +23,13 @@ export default function QuizCardResult({
   handleCorrectAnswer,
 }: QuizCardResultProps) {
 
-  const points = 0.5; // Default points for each correct answer
+  const points = 0.5;
 
-  // useEffect to check if the selected answer is correct
   useEffect(() => {
     if (selectedAnswer === correctOption) {
-      handleCorrectAnswer(); // Increment the score if the answer is correct
+      handleCorrectAnswer(); // Increment the number of correct answers
     }
-    // Dependencies should be minimized to avoid unnecessary calls
-  }, [selectedAnswer, correctOption, handleCorrectAnswer]); // Ensure this only runs on necessary changes
+  }, [selectedAnswer, correctOption, handleCorrectAnswer]);
 
   return (
     <Card className="mb-10 mx-auto max-w-lg">

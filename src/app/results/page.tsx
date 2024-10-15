@@ -12,12 +12,11 @@ import QuizCardResult from "@/components/ui/quiz-card-result";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [score, setScore] = useState(0.0);
+  const [correctAnswers, setCorrectAnswers] = useState(0); // To track number of correct answers
   const [time, setTime] = useState("00:00");
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
-  const maxScore = 2.5;
-  const points = 0.5;
-
+  const maxScore = 2.5; // Adjust this to match the number of questions multiplied by points
+  const points = 0.5; // Points per correct answer
   
   useEffect(() => {
     const storedQuizQuestions = localStorage.getItem("quizQuestions");
@@ -44,11 +43,14 @@ export default function Quiz() {
     }
   }, []);
   
-    // Placeholder: Set score (you can replace this logic with actual scoring logic)
-    //setScore(85); // Example score
-    const handleCorrectAnswer = useCallback(() => {
-      setScore((prevScore) => prevScore + points); // Adjust points based on your scoring logic
-  }, [points]);
+  // Update the number of correct answers
+  const handleCorrectAnswer = useCallback(() => {
+    setCorrectAnswers((prevCount) => prevCount + 0.5); // Count the correct answers
+  }, []);
+  
+  // Calculate the total score by multiplying correct answers with points
+  const totalScore = correctAnswers * points;
+
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-2 right-4">
@@ -82,18 +84,15 @@ export default function Quiz() {
           </header>
 
           <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
-            {/* Title Section */}
             <div className="w-full">
               <h1 className="text-lg font-semibold md:text-2xl">Results Page</h1>
-              {/* Score and Time Section */}
               <div className="mt-2 flex justify-between">
-              <p className="text-sm md:text-lg">Score: {score.toFixed(2)} / 2.5</p>
-              <p className="text-sm md:text-lg">Percentage: {((score / maxScore) * 100).toFixed(2)}%</p>
+              <p className="text-sm md:text-lg">Score: {totalScore.toFixed(2)} / {maxScore}</p>
+              <p className="text-sm md:text-lg">Percentage: {((totalScore / maxScore) * 100).toFixed(2)}%</p>
                 <p className="text-sm md:text-lg">Time: {time}</p>
               </div>
             </div>
             
-
 
             <div
               className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
@@ -109,10 +108,10 @@ export default function Quiz() {
                       questionNumber={quiz.question_number}
                       question={quiz.quiz_question}
                       options={quiz.options}
-                      correctOption={quiz.correct_option} // Pass the correct option
+                      correctOption={quiz.correct_option}
                       reference={quiz.reference}
                       selectedAnswer={userAnswers[index+1]}
-                      handleCorrectAnswer={handleCorrectAnswer}
+                      handleCorrectAnswer={handleCorrectAnswer} // Callback for correct answer
                       />
                     ))
                   ) : (
