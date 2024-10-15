@@ -27,11 +27,11 @@ export default function QuizCardResult({
 
   const points = 0.5; // Default points for each correct answer  
 
-  useEffect(() => {
-    if (selectedAnswer === correctOption) {
-      setScore((prevScore: number) => prevScore + points); // Only add score if correct
-    }
-  }, [selectedAnswer, correctOption, points, setScore]);
+  // useEffect(() => {
+  //   if (selectedAnswer === correctOption) {
+  //     setScore((prevScore: number) => prevScore + points); // Only add score if correct
+  //   }
+  // }, [selectedAnswer, correctOption, points, setScore]);
 
   return (
     <Card className="mb-10 mx-auto max-w-lg"> 

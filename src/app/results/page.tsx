@@ -44,7 +44,15 @@ export default function Quiz() {
   
     // Placeholder: Set score (you can replace this logic with actual scoring logic)
     //setScore(85); // Example score
-    setScore(0);
+    let correctAnswersCount = 0;
+    quizData.forEach((quiz, index) => {
+      if (userAnswers[index] === quiz.correct_option) {
+        correctAnswersCount++;
+      }
+    });
+
+    // Each correct answer gives 0.5 points
+    setScore(correctAnswersCount * 0.5);
   }, []);
 
   const scorePercentage = ((score / maxScore) * 100).toFixed(2);
