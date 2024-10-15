@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
 import { useEffect, useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import QuizCard from "@/components/ui/quiz-card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Sidebar from "@/components/ui/sidebar";
 import { UserDropdown } from "@/components/ui/userDropdown";
