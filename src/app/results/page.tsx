@@ -12,11 +12,11 @@ import QuizCardResult from "@/components/ui/quiz-card-result";
 export default function Quiz() {
   const [quizData, setQuizData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const [correctAnswers, setCorrectAnswers] = useState(0); // To track number of correct answers
+  const [correctAnswers, setCorrectAnswers] = useState(0);
   const [time, setTime] = useState("00:00");
   const [userAnswers, setUserAnswers] = useState<any[]>([]);
-  const maxScore = 2.5; // Adjust this to match the number of questions multiplied by points
-  const points = 0.5; // Points per correct answer
+  const maxScore = 2.5;
+  const points = 0.5;
   
   useEffect(() => {
     const storedQuizQuestions = localStorage.getItem("quizQuestions");
@@ -33,7 +33,6 @@ export default function Quiz() {
       console.error("No submitted answers found in local storage");
     }
   
-    // Load the time taken
     const storedTimeTaken = localStorage.getItem("timeTaken");
     if (storedTimeTaken) {
       const timeTakenSeconds = JSON.parse(storedTimeTaken);
@@ -43,12 +42,10 @@ export default function Quiz() {
     }
   }, []);
   
-  // Update the number of correct answers
   const handleCorrectAnswer = useCallback(() => {
-    setCorrectAnswers((prevCount) => prevCount + 0.5); // Count the correct answers
+    setCorrectAnswers((prevCount) => prevCount + 0.5);
   }, []);
   
-  // Calculate the total score by multiplying correct answers with points
   const totalScore = correctAnswers * points;
 
   return (
@@ -62,7 +59,6 @@ export default function Quiz() {
           <Sidebar />
         </div>
 
-        {/* LEFT-SIDE NAVBAR UPON SCREEN RESIZE */}
         <div className="flex flex-col">
           <header className="flex h-14 items-center gap-4 border-b bg-muted/40 px-4 lg:h-[60px] lg:px-6">
             <Sheet>
@@ -111,7 +107,7 @@ export default function Quiz() {
                       correctOption={quiz.correct_option}
                       reference={quiz.reference}
                       selectedAnswer={userAnswers[index+1]}
-                      handleCorrectAnswer={handleCorrectAnswer} // Callback for correct answer
+                      handleCorrectAnswer={handleCorrectAnswer}
                       />
                     ))
                   ) : (
