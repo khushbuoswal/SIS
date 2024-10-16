@@ -38,7 +38,7 @@ export default function QuizCardResult({
           <CardTitle className="text-xl">Question {questionNumber}</CardTitle>
           <div className="font-semibold">{points} Points</div>
         </div>
-        <div>{reference}</div>
+        
       </CardHeader>
       <CardContent className="p-4">
         <div className="mb-4">{question}</div>
@@ -54,6 +54,7 @@ export default function QuizCardResult({
             <Separator className="mt-3" />
           </div>
         ))}
+        <div className="italic text-sm bg-gray-100 p-2 rounded-md pl-4 border-l-4 border-gray-300">{reference}</div>
       </CardContent>
     </Card>
   );
