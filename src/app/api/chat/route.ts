@@ -21,12 +21,12 @@ export async function POST(request: NextRequest) {
 
     // Use the fine-tuned model to generate questions
     const completion = await openai.chat.completions.create({
-      model: "ft:gpt-4o-mini-2024-07-18:karan-openai:quizzly-v2:ABhTUCY9", // Updated to fine-tuned model
+      model: "ft:gpt-4o-mini-2024-07-18:karan-openai:quizzly-v3:AImjNW0J", // Updated to fine-tuned model v3
       messages: [
         {
           role: "system",
           content:
-            `Given a user prompt, always respond in the following JSON format: {\"question_number\": \"number\", \"quiz_question\": \"question text\", \"options\": [\"option1\", \"option2\", \"option3\", \"option4\"], \"correct_option\": \"correct answer\", \"reference\": \"source\"}.`,
+            `Given a user prompt, always respond in the following JSON format: {\"question_number\": \"number\", \"quiz_question\": \"question text\", \"options\": [\"option1\", \"option2\", \"option3\", \"option4\"], \"correct_option\": \"correct answer\", \"reference\": \"source\"}, where reference is short reference sentence from the text that explains why the correct answer is correct.`, //updated prompt for referencing.
         },
         {
           role: "user",
