@@ -23,6 +23,7 @@ import React, { useEffect, useState } from "react";
 export default function Home() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [user, setUser] = useState({
     email: '',
@@ -45,6 +46,7 @@ export default function Home() {
       router.push('/dashboard');
     } catch (error: any) {
       console.log('Login failed', error.message);
+      setErrorMessage("Invalid credentials. Please try again.");
       setLoading(false);
     }
   };
@@ -99,6 +101,12 @@ export default function Home() {
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 required />
             </div>
+            {/* Error message display */}
+            {errorMessage && (
+              <div className="text-red-500 text-sm text-center">
+                {errorMessage}
+              </div>
+            )}
             <Button type="submit" onClick={handleLogin} disabled={loading}>
               {loading ? <ButtonLoadingDashboard /> : "Login"}
             </Button>
