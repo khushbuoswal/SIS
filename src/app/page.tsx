@@ -15,18 +15,38 @@ import { Input } from "@/components/ui/input";
 import { Globe } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
 import { ButtonLoadingDashboard } from "@/components/ui/button-loading";
+import { useRouter } from "next/navigation";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+
+  // const handleLogin = async () => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     // Redirect to /dashboard after 3 seconds
+  //     window.location.href = "/dashboard";
+  //   }, 1000);
+  // };
+
   const handleLogin = async () => {
-    setLoading(true);
-    setTimeout(() => {
-      // Redirect to /dashboard after 3 seconds
-      window.location.href = "/dashboard";
-    }, 1000);
+    try {
+      setLoading(true);
+      const response = await axios.post('api/users/login', user);
+      console.log('Login successful', response.data);
+      router.push('/dashboard');
+    } catch (error: any) {
+      console.log('Login failed', error.message);
+      setLoading(false);
+    }
   };
 
   return (
@@ -57,6 +77,8 @@ export default function Home() {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 required
               />
             </div>
@@ -70,7 +92,12 @@ export default function Home() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                required />
             </div>
             <Button type="submit" onClick={handleLogin} disabled={loading}>
               {loading ? <ButtonLoadingDashboard /> : "Login"}
