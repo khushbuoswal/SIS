@@ -22,6 +22,7 @@ import { ButtonLoading } from "@/components/ui/button-loading";
 export default function Register() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const [user, setUser] = useState({
     firstName: '',
@@ -38,8 +39,9 @@ export default function Register() {
       router.push("/");
     } catch (error: any) {
       console.log('Failed to create an account. Please try again.', error.message);
+      setErrorMessage("An account under this email already exists. Please try again.");
       setLoading(false);
-    } 
+    }
   }
 
   return (
@@ -99,6 +101,12 @@ export default function Register() {
                 onChange={(e) => setUser({ ...user, password: e.target.value })}
                 required />
             </div>
+            {/* Error message display */}
+            {errorMessage && (
+              <div className="text-red-500 text-sm text-center">
+                {errorMessage}
+              </div>
+            )}
             <Button type="submit" onClick={handleRegister} disabled={loading}>
               {loading ? <ButtonLoading /> : "Create an account"}
             </Button>
