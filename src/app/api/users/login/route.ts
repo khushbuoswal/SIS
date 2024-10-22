@@ -11,8 +11,6 @@ export async function POST(request: NextRequest) {
     try {
         const requestBody = await request.json();
         const { email, password } = requestBody;
-        // REMOVE FROM PROD
-        console.log(requestBody)
 
         const user = await User.findOne({ email });
         if (!user) {
