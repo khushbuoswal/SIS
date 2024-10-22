@@ -14,8 +14,34 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Globe } from "lucide-react";
 import { ModeToggle } from "@/components/mode-toggle";
+import { useRouter } from "next/navigation";
+import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { ButtonLoading } from "@/components/ui/button-loading";
 
 export default function Register() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  });
+
+  const handleRegister = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post('/api/users/signup', user);
+      console.log('Sign up complete.', response.data);
+      router.push("/");
+    } catch (error: any) {
+      console.log('Failed to create an account. Please try again.', error.message);
+      setLoading(false);
+    } 
+  }
+
   return (
     <main className="flex flex-col justify-center items-center size-full">
       <div className="absolute top-4 right-4">
@@ -34,11 +60,23 @@ export default function Register() {
             <div className="grid grid-cols-2 gap-4">
               <div className="grid-gap-2">
                 <Label>First name</Label>
-                <Input id="first-name" placeholder="John" required />
+                <Input
+                  id="first-name"
+                  type="text"
+                  placeholder="John"
+                  value={user.firstName}
+                  onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                  required />
               </div>
               <div className="grid-gap-2">
                 <Label>Last name</Label>
-                <Input id="last-name" placeholder="Smith" required />
+                <Input
+                  id="last-name"
+                  type="text"
+                  placeholder="Smith"
+                  value={user.lastName}
+                  onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                  required />
               </div>
             </div>
             <div className="grid-gap-2">
@@ -47,14 +85,23 @@ export default function Register() {
                 id="email"
                 type="email"
                 placeholder="m@example.com"
+                value={user.email}
+                onChange={(e) => setUser({ ...user, email: e.target.value })}
                 required
               />
             </div>
             <div className="grid-gap-2">
               <Label>Password</Label>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                type="password"
+                value={user.password}
+                onChange={(e) => setUser({ ...user, password: e.target.value })}
+                required />
             </div>
-            <Button type="submit">Create an account</Button>
+            <Button type="submit" onClick={handleRegister} disabled={loading}>
+              {loading ? <ButtonLoading /> : "Create an account"}
+            </Button>
             <div className="relative flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="mx-5 flex-shrink text-sm text-gray-500">
