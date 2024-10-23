@@ -3,8 +3,24 @@
 import { DropdownMenu, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { CircleUser } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie';
 
 export function UserDropdown() {
+  const router = useRouter();
+
+  // Function to handle logout
+  const handleLogout = () => {
+    // Clear the token cookie (logout the user)
+    Cookies.remove('token');
+
+    // Redirect to login page
+    router.push("/");
+
+    // Prevent the back button from working after logout
+    router.replace("/");
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -19,7 +35,7 @@ export function UserDropdown() {
         <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem>Support</DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Logout</DropdownMenuItem>
+        <DropdownMenuItem onClick={handleLogout}>Logout</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
