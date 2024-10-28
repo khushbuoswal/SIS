@@ -31,6 +31,19 @@ export default function Register() {
     password: '',
   });
 
+  // const handleRegister = async () => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await axios.post('/api/users/signup', user);
+  //     console.log('Sign up complete.', response.data);
+  //     router.push("/");
+  //   } catch (error: any) {
+  //     console.log('Failed to create an account. Please try again.', error.message);
+  //     setErrorMessage("An account under this email already exists. Please try again.");
+  //     setLoading(false);
+  //   }
+  // }
+
   const handleRegister = async () => {
     try {
       setLoading(true);
@@ -38,11 +51,21 @@ export default function Register() {
       console.log('Sign up complete.', response.data);
       router.push("/");
     } catch (error: any) {
-      console.log('Failed to create an account. Please try again.', error.message);
-      setErrorMessage("An account under this email already exists. Please try again.");
+      if (error.response) {
+        if (error.response.status === 400) {
+          setErrorMessage("An account under this email already exists. Please try again.");
+        } else if (error.response.status === 500) {
+          setErrorMessage("Please complete all fields before proceeding.");
+        } else {
+          setErrorMessage("Failed to create an account. Please try again.");
+        }
+      } else {
+        setErrorMessage("Network error. Please check your connection and try again.");
+      }
+      console.error('Failed to create an account:', error.message);
       setLoading(false);
     }
-  }
+  };
 
   return (
     <main className="flex flex-col justify-center items-center size-full">
